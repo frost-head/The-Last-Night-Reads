@@ -1,68 +1,91 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-<a class="navbar-brand" href="/home"><h4>School Fourm</h4></a>
+<section id = "Navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/home"><h4>School Fourm</h4></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
 
-            {% if 'home' in route%}
-                <!--home-->
-                <li class="nav-item active">
-                    <a class="nav-link" href="/home">Home </a>
-                </li>
-                <!--questions-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/questions">Questions</a>
-                </li>
-                <!--profile-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile" >Profile</a>
-                </li>
-            
-            {% elif 'questions' in route %}
-                <!--home-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home </a>
-                </li>
-                <!--questions-->
-                <li class="nav-item active">
-                    <a class="nav-link" href="/questions">Questions</a>
-                </li>
-                <!--profile-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile" >Profile</a>
-                </li>
-            
-            {% elif 'profile' in route %}
-                <!--home-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home </a>
-                </li>
-                <!--questions-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/questions">Questions</a>
-                </li>
-                <!--profile-->
-                <li class="nav-item active">
-                    <a class="nav-link" href="/profile" >Profile</a>
-                </li>  
-            {% else %}
-                <!--home-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home </a>
-                </li>
-                <!--questions-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/questions">Questions</a>
-                </li>
-                <!--profile-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile" >Profile</a>
-                </li>    
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+                {% if 'home' in route%}
+                    <!--home-->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">Home </a>
+                    </li>
+                    <!--questions-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/questions">Questions</a>
+                    </li>
+                    <!--profile-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile" >Profile</a>
+                    </li>
+                
+                {% elif 'questions' in route %}
+                    <!--home-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home </a>
+                    </li>
+                    <!--questions-->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/questions">Questions</a>
+                    </li>
+                    <!--profile-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile" >Profile</a>
+                    </li>
+                
+                {% elif 'profile' in route %}
+                    <!--home-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home </a>
+                    </li>
+                    <!--questions-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/questions">Questions</a>
+                    </li>
+                    <!--profile-->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/profile" >Profile</a>
+                    </li>  
+                {% else %}
+                    <!--home-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home </a>
+                    </li>
+                    <!--questions-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/questions">Questions</a>
+                    </li>
+                    <!--profile-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile" >Profile</a>
+                    </li>    
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</section>
+
+<!--_________STYLE_____________-->
+
+<style>
+
+.navbar{
+    background-image: linear-gradient(to right, #111111 100%, #2f2f2f 100%);
+
+
+}
+.navbar-nav{
+
+    font-weight: 600;
+}
+#Navbar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+</style>

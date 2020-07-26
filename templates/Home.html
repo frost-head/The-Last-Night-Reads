@@ -7,16 +7,39 @@
 {% block body %}
 <br>
 <br>
-<div class="jumbotron">
-    <h1 class="display-4">Wellcome to our, School Forum. </h1>
-    <p class="lead">On this platform you can discuss your Questions, Ideas with thousands of people and more adding daily. You can get the inspiration you seek from here. And best part it's all free.</p>
-    <hr class="my-4">
-    <p>Make your account today and enjoy our service.</p>
-    <p class="lead">
-        <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
-        <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
-    </p>
-</div>
+
+<section class = "col-md">
+    <div class="jumbotron">
+        <h1 class="display-4 text">Wellcome to our, School Forum. </h1>
+        <p class="lead text">On this platform you can discuss your Questions, Ideas with thousands of people and more adding daily. You can get the inspiration you seek from here. And best part it's all free.</p>
+        <hr class="my-4 text">
+        <p class="text">Make your account today and enjoy our service.</p>
+        <p class="lead">
+            <a class="btn btn-success btn-lg" id = "registerbutton" href="/register" role="button">Register</a>
+            <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+        </p>
+    </div>
+    <div class="jumbotron">
+        <h1 class="display-4 text">Wellcome to our, School Forum. </h1>
+        <p class="lead text">On this platform you can discuss your Questions, Ideas with thousands of people and more adding daily. You can get the inspiration you seek from here. And best part it's all free.</p>
+        <hr class="my-4 text">
+        <p class="text ">Make your account today and enjoy our service.</p>
+        <p class="lead">
+            <a class="btn btn-success btn-lg" id = "registerbutton" href="/register" role="button">Register</a>
+            <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+        </p>
+    </div>
+</section>
+
+
+<style>
+    .jumbotron{
+        background:#1f1f1f ;
+    }
+    .text{
+        color: #ffffff;
+    }
+</style>
 
 
 {% endblock %}
