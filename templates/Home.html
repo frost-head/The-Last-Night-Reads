@@ -5,20 +5,24 @@
 {% endblock %}
 
 {% block body %}
-<br>
-<br>
 
-
-
-
-<style>
-    .jumbotron{
-        background:#1f1f1f ;
-    }
-    .text{
-        color: #ffffff;
-    }
-</style>
-
+<section id = "Banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class = 'title'>
+                    THIS IS TEST COL 1
+                </h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo perspiciatis optio tempore velit vero, repellat autem vitae accusamus. Numquam quas doloribus ad nisi, voluptates natus libero cupiditate nam deserunt eius?
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src={{url_for('static', filename='Newlogo.svg')}} class="img"/>
+            </div>
+        </div>
+    </div>
+    <img src={{url_for('static', filename='backdrop2.svg')}} />
+</section>
 
 {% endblock %}

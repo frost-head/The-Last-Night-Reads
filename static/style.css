@@ -1,0 +1,16 @@
+*
+
+/*-------------------------------HOME-Banner--------------------------------*/
+.bottom-img{
+    width: 100%;
+}
+#Banner{
+    /*background-image: linear-gradient(to right, #ffffff 100%, #2f2f2f 100%);*/}
+.img{
+    width:20%;
+}
+.title{
+    color: cornsilk;
+    padding: 100px;
+    margin: 200px;
+}

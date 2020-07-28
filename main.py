@@ -1,8 +1,9 @@
-from flask import Flask , redirect, render_template
+from flask import Flask , redirect, render_template,url_for
 from datetime import datetime
 
 # CONFIG
 app = Flask(__name__)
+
 
 # ROUTES
 # HOME ROUTE

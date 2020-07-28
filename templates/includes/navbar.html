@@ -1,6 +1,8 @@
 <section id = "Navbar">
     <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/home"><h4>School Fourm</h4></a>
+    <a class="navbar-brand" href="/home">
+        <img src={{url_for('static', filename='Newlogo.svg')}} class = "logo" />
+    </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -87,5 +89,10 @@
     top: 0;
     z-index: 10;
 }
+
+.logo{
+    width: 25%;
+}
+
 
 </style>
