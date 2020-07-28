@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0.17 448.545 1920 668.455" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0.17 447.204 1920 669.796" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="radial-gradient" cx="1571.2" cy="309.08" r="174.53" gradientTransform="matrix(0.98, 0.2, 0.2, -0.98, -29.57, 760.55)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#f15a24"/>
@@ -22,7 +22,7 @@
     </linearGradient>
     <style>.cls-1{fill:#fff;}.cls-2{fill:url(#radial-gradient);}.cls-3{fill:url(#linear-gradient);}.cls-4{fill:#e6e6e6;}.cls-5{opacity:0.14;}.cls-5,.cls-6{isolation:isolate;}.cls-6{fill:#1a1a1a;opacity:0.17;}.cls-7{fill:url(#linear-gradient-2);}</style>
   </defs>
-  <path class="cls-1" d="M.17,941.84s16.72,18,106.73,21,1674.17-306,1743.18-306,70.09,15,70.09,15V1117H.17Z" style="fill: rgb(225, 225, 225); stroke-width: 0px; stroke-opacity: 0;"/>
+  <path class="cls-1" d="M.17,941.84s16.72,18,106.73,21,1674.17-306,1743.18-306,70.09,15,70.09,15V1117H.17Z" style="stroke-width: 0px; stroke-opacity: 0; fill: rgb(25, 29, 48);"/>
   <path class="cls-2" d="M1374.72,739.84l407.59-73.25s33.94,196.67-162.61,242.58S1374.72,739.84,1374.72,739.84Z"/>
   <path class="cls-3" d="M 1374.72 739.84 L 1318.72 749.49 C 1318.72 749.49 1342.17 871.928 1428.17 929 C 1514.17 986.072 1597.17 984 1671.17 961 C 1745.17 938 1810.098 866.144 1822.098 820.144 C 1834.098 774.144 1853.08 656.144 1830.17 658 C 1809.924 659.64 1797.89 660.44 1791 662.52 C 1776.198 666.931 1761.153 670.481 1745.94 673.15 L 1374.72 739.84 Z"/>
   <path class="cls-4" d="M1374.55,741.23l407.1-75.49s-37.69-196-237.78-169.45S1374.55,741.23,1374.55,741.23Z"/>

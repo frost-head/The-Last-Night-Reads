@@ -23,22 +23,23 @@
                 <p class = 'title-follow'>
                     Connect to Thousands of students accross India.</br>
                     More joining Daily.
-                </p>
-                
+                </p>              
             </div>
-        </div>
-        
+        </div>        
     </div>
-    <img src={{url_for('static', filename='backdrop2.svg')}} />
+    <img src={{url_for('static', filename='backdrop4.svg')}} />
 </section>
+
 
 <!----------------2nd Banner---------------------->
 <section id = "OUR-BELIVE">
     <div class = "container">
-        <div class = "row">
-            <p class = "belive"> OUR BELIVE! </p>
+        <p class = "belive"> Our belive! </p>
+        <div class = "row">    
             <div class="col-md-6">
-
+                <p class = "serk">
+                    S.E.R.K
+                </p>
             </div>
         </div>
     </div>
@@ -75,11 +76,20 @@
         padding-bottom: 0px;
     }
     /*----------------2nd Banner-------------------*/
-    #Our-Belive{
-        background-image: linear-gradient(to top ,#e1e1e1 0% , #e1e1e1 100%);
-    }
+    
     .belive{
-        align-content: center;
+        padding-top: 40px;
+        font-size: 80px;
+        text-align: center;
+        color: #e1e1e1;
+        font-family: "Lobster";
     }
+
+    .serk{
+        font-family: "Lobster";
+        font-size: 100px;
+        color: #e1e1e1;
+    }
+
 </style>
 {% endblock %}
