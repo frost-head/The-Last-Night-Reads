@@ -5,12 +5,12 @@
     width: 100%;
 }
 #Banner{
-    /*background-image: linear-gradient(to right, #ffffff 100%, #2f2f2f 100%);*/}
+    background-image: linear-gradient(to right, #000000 0%, #1e1e1e 100%);}
 .img{
     width:20%;
 }
 .title{
-    color: cornsilk;
-    padding: 100px;
-    margin: 200px;
+    color: black ;
+    padding: 10px;
+    margin: 0px;
 }
