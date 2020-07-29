@@ -36,9 +36,18 @@
     <div class = "container anim ">
         <p class = "belive"> Our belive! </p>
         <div class = "row">    
-            <div class="col-md-6">
+            <div class="col-md-6 anim2">
                 <p class = "serk">
                     S.E.R.K
+                </p>
+                <p class="SERKdef">
+                    Share Exchange Refine Knowldge
+                </p>
+            </div>
+            <div class = "col-md-6 pull anim2">
+                <p class="title-follow">
+                    We belive in S.E.R.K.<br>
+                    Means we want to share knowldge accross India and World.x
                 </p>
             </div>
         </div>
@@ -79,17 +88,34 @@
     
     .belive{
         padding-top: 40px;
-        font-size: 80px;
+        font-size: 120px;
         text-align: center;
         color: #e1e1e1;
         font-family: "Lobster";
     }
 
     .serk{
-        font-family: "Lobster";
+        text-align: center;
+        font-family: "Indie Flower";
         font-size: 100px;
         color: #e1e1e1;
+        padding-top: 100px;
     }
+
+    .SERKdef{
+        text-align: center;
+        font-family: "Indie Flower";
+        font-size: 40px;
+        color: #e1e1e1;
+        padding: 0px;
+    }
+
+    .pull{
+        font-size: 20px;
+    }
+
+
+/*-----------------Animations----------------------*/
     .anim{
         animation-timing-function: ease-in-out;
         animation: fadeIN;
@@ -102,7 +128,6 @@
 
     .anim2:hover{
         transform:scale(1.05,1.05)
-        
     } 
 
 </style>
