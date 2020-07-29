@@ -8,15 +8,15 @@
 
 <!---------------1st Banner----------------------->
 <section id = "Banner">
-    <div class="container ">
+    <div class="container anim">
         <div class="row sec">
-            <div class="col-md-6">
+            <div class="col-md-6 anim2">
                 <p class = 'title'>
                     Welcome to 
                 </p>
                 <img src={{url_for('static', filename='logo.svg')}} class="img"/>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 anim2">
                 <br>
                 <br>
                 <BR>
@@ -33,7 +33,7 @@
 
 <!----------------2nd Banner---------------------->
 <section id = "OUR-BELIVE">
-    <div class = "container">
+    <div class = "container anim ">
         <p class = "belive"> Our belive! </p>
         <div class = "row">    
             <div class="col-md-6">
@@ -81,15 +81,29 @@
         padding-top: 40px;
         font-size: 80px;
         text-align: center;
-        color: #455270;
+        color: #e1e1e1;
         font-family: "Lobster";
     }
 
     .serk{
         font-family: "Lobster";
         font-size: 100px;
-        color: #455270;
+        color: #e1e1e1;
     }
+    .anim{
+        animation-timing-function: ease-in-out;
+        animation: fadeIN;
+        animation-duration: 4s;
+    }
+    @keyframes fadeIN{
+        from {opacity: 0%;}
+        to {opacity: 100%;}
+    }
+
+    .anim2:hover{
+        transform:scale(1.05,1.05)
+        
+    } 
 
 </style>
 {% endblock %}
