@@ -5,18 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
-
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Indie+Flower&family=Lobster&family=Patrick+Hand&display=swap" rel="stylesheet">
     {% block head %} {% endblock %}
 </head>
 <body>
-    
-    <div class = "bg">
-        
-        {% include 'includes/navbar.html' %}
-
-
-        {% block body %} {% endblock %}
+    <div>   
+    {% include 'includes/navbar.html' %}
+    {% block body %} {% endblock %}
     </div>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

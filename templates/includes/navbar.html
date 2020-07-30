@@ -1,4 +1,4 @@
-<section id = "Navbar">
+<section class = "Navbar">
     <nav class="navbar navbar-expand-lg navbar-dark ">
     <a class="navbar-brand anim3" href="/home">
         <img src={{url_for('static', filename='logo.svg')}} class = "logo" />
@@ -83,14 +83,15 @@
 
     font-weight: 600;
 }
-#Navbar{
+.Navbar{
     position: sticky;
-    top: 0;
+    top: 0%;
     z-index: 10;
+
 }
 
 .logo{
-    width: 25%;
+    width: 30%;
 }
 .bgNAV{
     background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
@@ -106,6 +107,4 @@
         from {opacity: 0%;}
         to {opacity: 100%;}
     }
-
-
 </style>

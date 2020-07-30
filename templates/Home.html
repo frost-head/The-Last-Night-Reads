@@ -7,6 +7,7 @@
 {% block body %}
 
 <!---------------1st Banner----------------------->
+
 <section id = "Banner">
     <div class="container anim">
         <div class="row sec">
@@ -27,15 +28,20 @@
             </div>
         </div>        
     </div>
-    <img src={{url_for('static', filename='as.svg')}} class = "bottom-img"/>
+    <div class="bg">
+        <img src={{url_for('static', filename='BGIMG.svg')}} class = "bottom-img"/>
+        <img src={{url_for('static', filename='moon.svg')}} class="moon"/>   
+        <img src={{url_for('static', filename='cloud1.svg')}} class = "Cloud1"/>
+        <img src={{url_for('static', filename='cloud1.svg')}} class = "Cloud2"/>
+    </div>
 </section>
 
 
 <!----------------2nd Banner---------------------->
 <section id = "OUR-BELIVE">
-    <div class = "container anim ">
+    <div class = "container anim">
         <p class = "belive"> Our belive! </p>
-        <div class = "row">    
+        <div class = "row pad">    
             <div class="col-md-6 anim2">
                 <p class = "serk">
                     S.E.R.K
@@ -52,6 +58,7 @@
             </div>
         </div>
     </div>
+    <br>
 </section>
 
 <style>
@@ -71,7 +78,7 @@
         font-size: 70px;
         color: #e1e1e1;
         margin: 0px;
-        padding-top: 150px;
+        padding-top: 100px;
         padding-left: 40px; 
         padding-right: 30px;
         padding-bottom: 0px;  
@@ -80,12 +87,44 @@
         font-family: "Patrick Hand";
         color:#e1e1e1;
         font-size: 30px;
-        padding-top: 150px;
+        padding-top: 100px;
         padding-left: 40px;
         padding-bottom: 0px;
     }
-    /*----------------2nd Banner-------------------*/
+    .bg{
+        position: relative;     
+        overflow-x: hidden;
+    }
+    .Cloud1{
+        width : 30%;
+        position: absolute;
+        top : 40%;
+        right: 30%;
+        display: block;
+        animation: cloud1 3.5s ease-out;
+    }
+    .Cloud2{
+        width : 25%;
+        position: absolute;
+        top : 30%;
+        right: -5%;
+        display: block;
+        animation: cloud2 3.5s ease-out;     
+
+    }
+    .moon{
+        width: 25%;
+        top : 10%;
+        right: 10%;
+        position: absolute;
+        animation: glow 3.5s;
+    }
     
+
+    /*----------------2nd Banner-------------------*/
+    .pad{
+        padding-top: 20px;
+    }
     .belive{
         padding-top: 40px;
         font-size: 120px;
@@ -99,7 +138,7 @@
         font-family: "Indie Flower";
         font-size: 100px;
         color: #e1e1e1;
-        padding-top: 100px;
+        padding-top: 40px;
     }
 
     .SERKdef{
@@ -129,6 +168,33 @@
     .anim2:hover{
         transform:scale(1.05,1.05)
     } 
+
+    @keyframes cloud1{
+        0%{
+            opacity: 50%;
+            transform: translateX(100px);
+        }
+        100%{
+            transform: translateX(0px);
+        }
+    }
+
+    @keyframes cloud2{
+        0%{
+            opacity: 50%;
+            transform: translateX(-50px);
+        }
+        100%{
+            transform: translateX(0px);
+        }
+    }
+
+    @keyframes glow{
+        0% {opacity: 40%;}
+        100% {
+            opacity: 100%;
+            }
+    }
 
 </style>
 {% endblock %}
