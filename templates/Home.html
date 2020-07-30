@@ -1,56 +1,56 @@
 {% extends 'Base.html'%}
 
 {% block head %}
-<title>home</title> 
+<title>home</title>
 {% endblock %}
 
 {% block body %}
 
 <!---------------1st Banner----------------------->
 
-<section id = "Banner">
+<section id="Banner">
     <div class="container anim">
         <div class="row sec">
             <div class="col-md-6 anim2 text-center">
-                <p class = 'title'>
-                    Welcome to 
+                <p class='title'>
+                    Welcome to
                 </p>
-                <img src={{url_for('static', filename='logo.svg')}} class="img"/>
+                <img src={{url_for('static', filename='logo.svg')}} class="img" />
             </div>
             <div class="col-md-6 anim2 text-center">
                 <br>
                 <br>
                 <BR>
-                <p class = 'title-follow'>
+                <p class='title-follow'>
                     Connect to Thousands of students accross India.</br>
                     More joining Daily.
-                </p>              
+                </p>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="bg">
-        <img src={{url_for('static', filename='BGIMG.svg')}} class = "bottom-img"/>
-        <img src={{url_for('static', filename='moon.svg')}} class="moon"/>   
-        <img src={{url_for('static', filename='cloud1.svg')}} class = "Cloud1"/>
-        <img src={{url_for('static', filename='cloud1.svg')}} class = "Cloud2"/>
+        <img src={{url_for('static', filename='BGIMG.svg')}} class="bottom-img" />
+        <img src={{url_for('static', filename='moon.svg')}} class="moon" />
+        <img src={{url_for('static', filename='cloud1.svg')}} class="Cloud1" />
+        <img src={{url_for('static', filename='cloud1.svg')}} class="Cloud2" />
     </div>
 </section>
 
 
 <!----------------2nd Banner---------------------->
-<section id = "OUR-BELIVE">
-    <div class = "container anim">
-        <p class = "belive text-center"> Our belive! </p>
-        <div class = "row pad">    
+<section id="OUR-BELIVE">
+    <div class="container anim">
+        <p class="belive text-center"> Our belive! </p>
+        <div class="row pad">
             <div class="col-md-6 anim2 text-center">
-                <p class = "serk">
+                <p class="serk">
                     S.E.R.K
                 </p>
                 <p class="SERKdef">
                     Share Exchange Refine Knowldge
                 </p>
             </div>
-            <div class = "col-md-6 pull anim2 text-center">
+            <div class="col-md-6 pull anim2 text-center">
                 <p class="title-follow pull">
                     We belive in S.E.R.K.<br>
                     Means we want to share knowldge accross India and World.
@@ -63,79 +63,88 @@
 
 <style>
     /*-------------------------------HOME-Banner--------------------------------*/
-    .bottom-img{
+    .bottom-img {
         width: 100%;
     }
-    #Banner{
-        background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);}
-    
-    .img{
-        width: 80%;       
+
+    #Banner {
+        background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
+    }
+
+    .img {
+        width: 80%;
         padding-left: 30px;
     }
+
     .title {
         font-family: "Lobster", cursive;
         font-size: 70px;
         color: #e1e1e1;
         padding-top: 100px;
-        padding-bottom: 0px;  
+        padding-bottom: 0px;
     }
-    .title-follow{
+
+    .title-follow {
         font-family: "Patrick Hand";
-        color:#e1e1e1;
+        color: #e1e1e1;
         font-size: 30px;
         padding-top: 100px;
         padding-bottom: 0px;
     }
-    .bg{
-        position: relative;     
+
+    .bg {
+        position: relative;
         overflow-x: hidden;
     }
-    .Cloud1{
-        width : 30%;
+
+    .Cloud1 {
+        width: 30%;
         position: absolute;
-        top : 40%;
+        top: 40%;
         right: 30%;
         display: block;
         animation: cloud1 3.5s ease-out;
     }
-    .Cloud2{
-        width : 25%;
+
+    .Cloud2 {
+        width: 25%;
         position: absolute;
-        top : 30%;
+        top: 30%;
         right: -5%;
         display: block;
-        animation: cloud2 3.5s ease-out;     
+        animation: cloud2 3.5s ease-out;
 
     }
-    .moon{
+
+    .moon {
         width: 25%;
-        top : 10%;
+        top: 10%;
         right: 10%;
         position: absolute;
         animation: glow 3.5s;
     }
-    
+
 
     /*----------------2nd Banner-------------------*/
-    .pad{
+    .pad {
         padding-top: 20px;
     }
-    .belive{
+
+    .belive {
         padding-top: 40px;
         font-size: 120px;
         color: #e1e1e1;
         font-family: "Lobster";
     }
 
-    .serk{
+    .serk {
         font-family: "Indie Flower";
         font-size: 100px;
         color: #e1e1e1;
         padding-top: 40px;
     }
 
-    .SERKdef{
+    .SERKdef {
         text-align: center;
         font-family: "Indie Flower";
         font-size: 40px;
@@ -143,57 +152,66 @@
         padding: 0px;
     }
 
-    .pull{
+    .pull {
 
         padding-left: 20px;
         padding-right: 20px
     }
 
 
-/*-----------------Animations----------------------*/
-    .anim{
+    /*-----------------Animations----------------------*/
+    .anim {
         animation-timing-function: ease-in-out;
         animation: fadeIN;
         animation-duration: 3.5s;
     }
-    @keyframes fadeIN{
-        from {opacity: 0%;}
-        to {opacity: 100%;}
+
+    @keyframes fadeIN {
+        from {
+            opacity: 0%;
+        }
+
+        to {
+            opacity: 100%;
+        }
     }
 
-    .anim2:hover{
-        transform:scale(1.05,1.05)
-    } 
+    .anim2:hover {
+        transform: scale(1.05, 1.05)
+    }
 
-    @keyframes cloud1{
-        0%{
+    @keyframes cloud1 {
+        0% {
             opacity: 50%;
             transform: translateX(100px);
         }
-        100%{
+
+        100% {
             transform: translateX(0px);
         }
     }
 
-    @keyframes cloud2{
-        0%{
+    @keyframes cloud2 {
+        0% {
             opacity: 50%;
             transform: translateX(-50px);
         }
-        100%{
+
+        100% {
             transform: translateX(0px);
         }
     }
 
-    @keyframes glow{
-        0% {opacity: 40%;
+    @keyframes glow {
+        0% {
+            opacity: 40%;
             rotate: 0deg;
         }
+
         100% {
             opacity: 100%;
             rotate: 360deg;
-            }
+        }
     }
-
 </style>
 {% endblock %}

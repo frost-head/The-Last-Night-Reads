@@ -1,7 +1,8 @@
-<section class = "Navbar">
+<section class="Navbar">
     <nav class="navbar navbar-expand-lg navbar-dark ">
-    <a class="navbar-brand anim3" href="/home"><img src={{url_for('static',filename='logo.svg')}} class="logo "></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand anim3" href="/home"><img src={{url_for('static',filename='logo.svg')}} class="logo "></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -9,59 +10,59 @@
             <ul class="navbar-nav ">
 
                 {% if 'home' in route%}
-                    <!--home-->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/home">Home </a>
-                    </li>
-                    <!--questions-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/questions">Questions</a>
-                    </li>
-                    <!--profile-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile" >Profile</a>
-                    </li>
-                
+                <!--home-->
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home </a>
+                </li>
+                <!--questions-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/questions">Questions</a>
+                </li>
+                <!--profile-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+
                 {% elif 'questions' in route %}
-                    <!--home-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Home </a>
-                    </li>
-                    <!--questions-->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/questions">Questions</a>
-                    </li>
-                    <!--profile-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile" >Profile</a>
-                    </li>
-                
+                <!--home-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home </a>
+                </li>
+                <!--questions-->
+                <li class="nav-item active">
+                    <a class="nav-link" href="/questions">Questions</a>
+                </li>
+                <!--profile-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+
                 {% elif 'profile' in route %}
-                    <!--home-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Home </a>
-                    </li>
-                    <!--questions-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/questions">Questions</a>
-                    </li>
-                    <!--profile-->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/profile" >Profile</a>
-                    </li>  
+                <!--home-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home </a>
+                </li>
+                <!--questions-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/questions">Questions</a>
+                </li>
+                <!--profile-->
+                <li class="nav-item active">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
                 {% else %}
-                    <!--home-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Home </a>
-                    </li>
-                    <!--questions-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/questions">Questions</a>
-                    </li>
-                    <!--profile-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile" >Profile</a>
-                    </li>    
+                <!--home-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home </a>
+                </li>
+                <!--questions-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/questions">Questions</a>
+                </li>
+                <!--profile-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
@@ -72,44 +73,53 @@
 <!--_________STYLE_____________-->
 
 <style>
+    .navbar {
+        background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
+    }
 
-.navbar{
-    background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
-}
-.navbar-nav{
+    .navbar-nav {
 
-    font-weight: 600;
-}
-.Navbar{
-    position: sticky;
-    top: 0%;
-    z-index: 10;
+        font-weight: 600;
+    }
 
-}
-.navbar-brand {
-  padding: 0 10px;
-  height: auto;
-}
+    .Navbar {
+        position: sticky;
+        top: 0%;
+        z-index: 10;
 
-.mr0{
-margin-right:0pxImportant;
-}
+    }
 
-.logo{
-    width: 25%;
-}
-.bgNAV{
-    background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
-}
+    .navbar-brand {
+        padding: 0 10px;
+        height: auto;
+    }
 
-/*-----------------Animations----------------------*/
-.anim3{
+    .mr0 {
+        margin-right: 0pxImportant;
+    }
+
+    .logo {
+        width: 25%;
+    }
+
+    .bgNAV {
+        background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
+    }
+
+    /*-----------------Animations----------------------*/
+    .anim3 {
         animation-timing-function: ease-in-out;
         animation: fadeIN;
         animation-duration: 3.5s;
     }
-    @keyframes fadeIN{
-        from {opacity: 0%;}
-        to {opacity: 100%;}
+
+    @keyframes fadeIN {
+        from {
+            opacity: 0%;
+        }
+
+        to {
+            opacity: 100%;
+        }
     }
 </style>
