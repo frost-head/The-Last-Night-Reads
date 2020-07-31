@@ -1,14 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-<a class="navbar-brand" href="/home"><h4>School Fourm</h4></a>
+<section class="Navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <a class="navbar-brand anim3" href="/home"><img src={{url_for('static',filename='logo.svg')}} width="60"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="collapse navbar-collapse anim3" id="navbarNav">
+            <ul class="navbar-nav ">
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-
-            {% if 'home' in route%}
+                {% if 'home' in route%}
                 <!--home-->
                 <li class="nav-item active">
                     <a class="nav-link" href="/home">Home </a>
@@ -19,10 +20,10 @@
                 </li>
                 <!--profile-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile" >Profile</a>
+                    <a class="nav-link" href="/profile">Profile</a>
                 </li>
-            
-            {% elif 'questions' in route %}
+
+                {% elif 'questions' in route %}
                 <!--home-->
                 <li class="nav-item">
                     <a class="nav-link" href="/home">Home </a>
@@ -33,10 +34,10 @@
                 </li>
                 <!--profile-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile" >Profile</a>
+                    <a class="nav-link" href="/profile">Profile</a>
                 </li>
-            
-            {% elif 'profile' in route %}
+
+                {% elif 'profile' in route %}
                 <!--home-->
                 <li class="nav-item">
                     <a class="nav-link" href="/home">Home </a>
@@ -47,9 +48,9 @@
                 </li>
                 <!--profile-->
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile" >Profile</a>
-                </li>  
-            {% else %}
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                {% else %}
                 <!--home-->
                 <li class="nav-item">
                     <a class="nav-link" href="/home">Home </a>
@@ -60,9 +61,65 @@
                 </li>
                 <!--profile-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile" >Profile</a>
-                </li>    
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</section>
+
+
+<!--_________STYLE_____________-->
+
+<style>
+    .navbar {
+        background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
+    }
+
+    .navbar-nav {
+
+        font-weight: 600;
+    }
+
+    .Navbar {
+        position: sticky;
+        top: 0%;
+        z-index: 10;
+
+    }
+
+    .navbar-brand {
+        padding: 0 10px;
+        height: auto;
+    }
+
+    .mr0 {
+        margin-right: 0pxImportant;
+    }
+
+    .logo {
+        width: 25%;
+    }
+
+    .bgNAV {
+        background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
+    }
+
+    /*-----------------Animations----------------------*/
+    .anim3 {
+        animation-timing-function: ease-in-out;
+        animation: fadeIN;
+        animation-duration: 3.5s;
+    }
+
+    @keyframes fadeIN {
+        from {
+            opacity: 0%;
+        }
+
+        to {
+            opacity: 100%;
+        }
+    }
+</style>
