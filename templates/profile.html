@@ -5,5 +5,18 @@
 {% endblock %}
 
 {% block body %}
-<h1>Profile</h1>
+<div class = "pull container anim">
+    <div class="jumbotron">
+        {% if 'UserID' in session:%}
+            <h1>Logged in as {{UserData['UserName']}}</h1>
+            <h3>Name : {{UserData['Name']}}</h3>
+            <h3>Registered On: {{UserData['RegisterDate']}}</h3>
+            <a class="btn btn-danger" href="/logout">Logout</a>
+        {% else %}
+            <h1>Not yet logged in</h1>
+            <a class="btn btn-primary" href = "/login">Login</a>
+            <a class="btn btn-success" href = "/register">Register</a>
+        {% endif%}
+    </div>
+</div>
 {% endblock %}
