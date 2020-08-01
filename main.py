@@ -12,8 +12,7 @@ app.config['MYSQL_PASSWORD'] = 'TonyStark@439751'
 app.config['MYSQL_DB'] = 'LNR'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = b'FD\x89\xeeM\x0cK\x953\x11\x11\xce\xab\xf2\x11\x16'
-
-
+app.permanent_session_lifetime = timedelta(days=90)
  
 
 #intialising MySQL
@@ -46,7 +45,6 @@ def login():
 
         if sha256_crypt.verify(password_candidate,password):
             session['UserID'] = uid
-            print(session)
             return redirect(url_for('ShowHome'))
 
     return render_template('login.html',form=form, route=['login'])
@@ -138,6 +136,7 @@ class RegistrationForm(Form):
 class LoginForm(Form):
     username = TextField("User Name",[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
+
 
 if __name__ == "__main__":
     app.run(debug=True)

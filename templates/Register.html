@@ -8,12 +8,14 @@
 <div class= " pull container anim">
     <form method="POST" action="">
         {% for element in form%}
-            <div class="form-group">
-                {{ element.label(class="Flabel") }} {{ element(class="form-control") }}
+            <div class="form-group row">
+                {{ element.label(class="Flabel col-sm-2 col-form-label") }} 
+                {{ element(class="form-control form-control col-sm-6") }}
             </div>
             {% if element.errors %}
                 <ul class="errors err">{% for error in element.errors %}<li>{{ error }}</li>{% endfor %}</ul>
             {% endif %}
+
         {%endfor%}
         <br>
         <input class="btn btn-primary" type="submit" value="Register">
