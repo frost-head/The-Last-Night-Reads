@@ -1,3 +1,4 @@
+
 <section class="Navbar">
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <a class="navbar-brand anim3" href="/home"><img src={{url_for('static',filename='logo.svg')}} width="60"></a>
@@ -64,6 +65,7 @@
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 {% endif %}
+
             </ul>
         </div>
     </nav>
@@ -73,7 +75,7 @@
 <!--_________STYLE_____________-->
 
 <style>
-    .navbar {
+   .navbar {
         background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
     }
 
@@ -106,7 +108,6 @@
         background-image: linear-gradient(to right, #111111 0%, #1e1e1e 100%);
     }
 
-    /*-----------------Animations----------------------*/
     .anim3 {
         animation-timing-function: ease-in-out;
         animation: fadeIN;
