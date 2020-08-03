@@ -1,5 +1,10 @@
+.fstyleNormal{
+    font-family: "Patrick Hand";
+}
 
-
+.padall{
+    padding: 2vmax;
+}
 
 /*-------------------------------HOME-Banner--------------------------------*/
 .bottom-img {

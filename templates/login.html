@@ -7,9 +7,9 @@
 {% block body %}
 
 <div class="container pull anim">
-    <form method="POST" action="">
+    <form method="POST" action="" class="padall">
         {% for element in form%}
-            <div class="form-group row">
+            <div class="form-group row ">
                 {{ element.label(class="Flabel col-sm-2 col-form-label") }} 
                 {{ element(class="form-control form-control  col-sm-6") }}
             </div>
@@ -30,8 +30,11 @@
     }
     .err{
         font-size: 1vmax;
-        color: #e1e1e1;
+        color: #ff5050;
         font-family: "Patrick Hand";
+    }
+    .padall{
+        padding: 2vmax;
     }
 </style>
 {% endblock %}

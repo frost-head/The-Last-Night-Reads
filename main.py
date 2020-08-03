@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from flask_mysqldb import MySQL
 from wtforms import Form, TextField, PasswordField, validators, BooleanField, DateField,ValidationError
 from passlib.hash import sha256_crypt
+import os
 
 # CONFIG
 app = Flask(__name__)
@@ -11,9 +12,9 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'TonyStark@439751'
 app.config['MYSQL_DB'] = 'LNR'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.secret_key = b'FD\x89\xeeM\x0cK\x953\x11\x11\xce\xab\xf2\x11\x16'
-app.permanent_session_lifetime = timedelta(days=90)
- 
+app.secret_key = os.urandom(24)
+app.permanent_session_lifetime = timedelta(days=30)
+
 
 #intialising MySQL
 mysql = MySQL()
@@ -32,6 +33,10 @@ def ShowHome():
 @app.route('/login/', methods=['GET','POST'])
 def login():
     form = LoginForm(request.form)
+
+    if 'UserID' in session:
+        return redirect(url_for('showProfile'))
+
     if request.method == 'POST' and form.validate():
         username = form.username.data
         password_candidate = form.password.data
@@ -40,12 +45,13 @@ def login():
         cur.execute("select Uid,Password from user where UserName = %s",[username])
         data = cur.fetchone()
         cur.close()
-        password = data['Password']
-        uid = data["Uid"]
+        if data:
+            password = data['Password']
+            uid = data["Uid"]
 
-        if sha256_crypt.verify(password_candidate,password):
-            session['UserID'] = uid
-            return redirect(url_for('ShowHome'))
+            if sha256_crypt.verify(password_candidate,password):
+                session['UserID'] = uid
+                return redirect(url_for('ShowHome'))
 
     return render_template('login.html',form=form, route=['login'])
 
@@ -74,8 +80,9 @@ def showProfile():
         cur.execute("select * from user where Uid = %s",[session['UserID']])
         data = cur.fetchone()
         cur.close()
-        return render_template("profile.html", UserData = data, route=['profile'], session=session)
-    return render_template("profile.html",  route=['profile'], session=session)
+        
+        return render_template("profile.html", UserData = data, route=['profile'])
+    return render_template("profile.html",  route=['profile'])
 
 # REGISTER ROUTE
 
@@ -98,12 +105,10 @@ def register():
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO user(UserName, Name, Email, Password, Age) VALUES(%s, %s, %s, %s, %s)",(username, name, email, password, age))
         mysql.connection.commit()
-        cur.execute("select Uid from user Where UserName = %s", [username])
-        Uid = cur.fetchone()
-        cur.close()
-        session['UserID'] = Uid
         
-        return redirect(url_for("showProfile"))
+        cur.close()
+        
+        return redirect('/login')
         
 
     return render_template("Register.html",form=form, route=['register'])
