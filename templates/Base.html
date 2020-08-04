@@ -14,10 +14,27 @@
 </head>
 
 <body>
-    <div>
-        {% include 'includes/navbar.html' %}
+    {% include 'includes/navbar.html' %}
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        
+        {% if messages %}
+            <div class="container pull anim">
+            {% for categories, message in messages %}        
+            <div class="alert alert-{{categories}} alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>       
+            {% endfor %}
+            </div>  
+        {% endif %}
+         
+        {% endwith %}
+     
         {% block body %} {% endblock %}
-    </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

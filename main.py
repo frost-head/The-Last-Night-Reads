@@ -1,8 +1,8 @@
 from flask import Flask, redirect, render_template, url_for, flash, session,logging, request
 from datetime import datetime, timedelta
 from flask_mysqldb import MySQL
-from wtforms import Form, TextField, PasswordField, validators, BooleanField, DateField,ValidationError
 from passlib.hash import sha256_crypt
+from forms import *
 import os
 
 # CONFIG
@@ -29,7 +29,6 @@ def ShowHome():
 
 # LOGIN ROUTE
 
-
 @app.route('/login/', methods=['GET','POST'])
 def login():
     form = LoginForm(request.form)
@@ -51,7 +50,8 @@ def login():
 
             if sha256_crypt.verify(password_candidate,password):
                 session['UserID'] = uid
-                return redirect(url_for('ShowHome'))
+                flash('Successfully logged in', 'success')
+                return redirect(url_for('showQuestions'))
 
     return render_template('login.html',form=form, route=['login'])
 
@@ -61,6 +61,7 @@ def login():
 def logout():
     if 'UserID' in session:
         session.pop('UserID')
+        flash('Logged Out', 'danger')
     return redirect(url_for('showProfile'))
 
 # QUSTIONS ROUTE
@@ -107,40 +108,25 @@ def register():
         mysql.connection.commit()
         
         cur.close()
-        
+        flash('You are successfully Registered', 'success')
         return redirect('/login')
         
 
     return render_template("Register.html",form=form, route=['register'])
 
-# ROUTES ENDED
-# form classes
 
-# Register Form
-class RegistrationForm(Form):
-    username = TextField('User Name', [validators.length(min = 1, max=100),validators.DataRequired()])
-    name = TextField('Name', [validators.length(min = 4, max=35),validators.DataRequired()])
-    age = DateField('Birth Date')
-    email = TextField('Email Address', [validators.length(min=7,max=40),validators.DataRequired()])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.length(min=8),
-        validators.EqualTo('Confirm', message='Passwords do not match.'),
-    ])
-    Confirm = PasswordField('Confirm Password')
-    
-    def validate_username(self, username):
-        cur = mysql.connection.cursor()
-        cur.execute("select UserName from user where UserName = %s", [username.data])
-        user = cur.fetchone()
-        cur.close()
-        if user:
-            raise ValidationError('That username is taken. Please choose another.')
-    
-#login Form
-class LoginForm(Form):
-    username = TextField("User Name",[validators.DataRequired()])
-    password = PasswordField("Password",[validators.DataRequired()])
+# Ask Questions ROUTE
+@app.route('/askQuestion', methods=['GET', 'POST'])
+def askQuestion():
+    if 'UserID' in session:
+        pass
+    else:
+        flash("Please login before asking question.",'danger')
+        return redirect('/profile')
+    return render_template('AskQuestions.html')
+
+
+# ROUTES ENDED
 
 
 if __name__ == "__main__":
