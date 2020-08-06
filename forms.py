@@ -1,4 +1,4 @@
-from wtforms import Form, TextField, PasswordField, validators, BooleanField, DateField,ValidationError
+from wtforms import Form, TextAreaField, SelectField, TextField, PasswordField, validators, BooleanField, DateField,ValidationError
 from main import mysql
 
 # form classes
@@ -31,4 +31,15 @@ class LoginForm(Form):
 
 # AskQuestion form
 class AskQuestionForm(Form):
-    pass
+    # checking for standard data
+    ls = []
+    cur = mysql.connection.cursor()
+    cur.execute("Select StdKey, StdName from standard")
+    raw_std_data = cur.fetchall()
+    for i in raw_std_data:
+        j = (i['StdKey'],i['StdName'])
+        ls.append(j)
+    print(ls)
+
+    question  = TextAreaField("Question",[validators.DataRequired()])
+    standard = SelectField("Standard",choices=[("hello","mello")])

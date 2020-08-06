@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, url_for, flash, session,logg
 from datetime import datetime, timedelta
 from flask_mysqldb import MySQL
 from passlib.hash import sha256_crypt
-from forms import *
+from forms import RegistrationForm, LoginForm, AskQuestionForm
 import os
 
 # CONFIG
@@ -52,7 +52,10 @@ def login():
                 session['UserID'] = uid
                 flash('Successfully logged in', 'success')
                 return redirect(url_for('showQuestions'))
-
+            else:
+                flash('Invalid Log In','danger')
+        else:
+            flash('User not Found','danger')
     return render_template('login.html',form=form, route=['login'])
 
 # LOGOUT ROUTE
@@ -116,14 +119,20 @@ def register():
 
 
 # Ask Questions ROUTE
+
+test = True
+#if 'UserID' in session:
 @app.route('/askQuestion', methods=['GET', 'POST'])
 def askQuestion():
-    if 'UserID' in session:
-        pass
+    if test == True:
+        form = AskQuestionForm(request.form)
+        
+        if request.method == 'POST' and form.validate():
+            pass
     else:
         flash("Please login before asking question.",'danger')
         return redirect('/profile')
-    return render_template('AskQuestions.html')
+    return render_template('AskQuestions.html',form=form)
 
 
 # ROUTES ENDED
