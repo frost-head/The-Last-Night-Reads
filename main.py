@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, url_for, flash, session,logg
 from datetime import datetime, timedelta
 from flask_mysqldb import MySQL
 from passlib.hash import sha256_crypt
-from forms import RegistrationForm, LoginForm, AskQuestionForm
+from forms import *
 import os
 
 # CONFIG
@@ -118,17 +118,42 @@ def register():
     return render_template("Register.html",form=form, route=['register'])
 
 
-# Ask Questions ROUTE
-
-test = True
-#if 'UserID' in session:
+# Ask Questions ROUTE 'UserID' in session
 @app.route('/askQuestion', methods=['GET', 'POST'])
 def askQuestion():
-    if test == True:
+    if True:
         form = AskQuestionForm(request.form)
+        StdData = []
+        SubData = []
+        cur = mysql.connection.cursor()
         
+        #got Subject data
+        cur.execute("Select StdKey, StdName from standard")
+        raw_std_data = cur.fetchall()
+        for i in raw_std_data:
+            j = (i['StdKey'],i['StdName'])
+            StdData.append(j)
+        
+        #got Standard data
+        cur.execute("Select SubKey, SubName from subjects")
+        raw_sub_data = cur.fetchall()
+        for i in raw_sub_data:
+            j = (i['SubKey'],i['SubName'])
+            SubData.append(j) 
+        
+        form.standard.choices = StdData
+        form.subject.choices = SubData
+
+
         if request.method == 'POST' and form.validate():
-            pass
+            Question = str(form.question.data)
+            Standard = str(form.standard.data)
+            Subject = str(form.subject.data)
+            Uid = session['UserID']
+            cur.execute("insert into Textual_Question(Uid, Question, standard, Subject) values(%s,%s,%s,%s)",(Uid,Question,Standard,Subject))
+            mysql.connection.commit()
+            cur.close()
+
     else:
         flash("Please login before asking question.",'danger')
         return redirect('/profile')
@@ -136,6 +161,7 @@ def askQuestion():
 
 
 # ROUTES ENDED
+
 
 
 if __name__ == "__main__":
