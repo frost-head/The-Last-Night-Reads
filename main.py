@@ -1,8 +1,8 @@
 from flask import Flask, redirect, render_template, url_for, flash, session,logging, request
 from datetime import datetime, timedelta
 from flask_mysqldb import MySQL
-from wtforms import Form, TextField, PasswordField, validators, BooleanField, DateField,ValidationError
 from passlib.hash import sha256_crypt
+from forms import *
 import os
 
 # CONFIG
@@ -29,7 +29,6 @@ def ShowHome():
 
 # LOGIN ROUTE
 
-
 @app.route('/login/', methods=['GET','POST'])
 def login():
     form = LoginForm(request.form)
@@ -51,8 +50,12 @@ def login():
 
             if sha256_crypt.verify(password_candidate,password):
                 session['UserID'] = uid
-                return redirect(url_for('ShowHome'))
-
+                flash('Successfully logged in', 'success')
+                return redirect(url_for('showProfile'))
+            else:
+                flash('Invalid Log In','danger')
+        else:
+            flash('User not Found','danger')
     return render_template('login.html',form=form, route=['login'])
 
 # LOGOUT ROUTE
@@ -61,6 +64,7 @@ def login():
 def logout():
     if 'UserID' in session:
         session.pop('UserID')
+        flash('Logged Out', 'danger')
     return redirect(url_for('showProfile'))
 
 # QUSTIONS ROUTE
@@ -68,20 +72,40 @@ def logout():
 
 @app.route('/questions/')
 def showQuestions():
-    return render_template('questions.html', route=['questions'])
+    cur = mysql.connection.cursor()
+    cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from user
+    inner join Textual_Question, subjects, standard where 
+    user.Uid = Textual_Question.Uid and
+    Textual_Question.Subject = subjects.Subkey and
+    Textual_Question.standard = standard.StdKey""")
+    q_data = cur.fetchall()
+
+
+    cur.close()
+    return render_template('questions.html', route=['questions'],Question_data=q_data)
 
 # PROFILE ROUTE
 
 
-@app.route('/profile/')
+@app.route('/profile/', methods=['GET','POST'])
 def showProfile():
     if "UserID" in session:
         cur = mysql.connection.cursor()
         cur.execute("select * from user where Uid = %s",[session['UserID']])
-        data = cur.fetchone()
+        u_data = cur.fetchone()
+        cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
+        inner join user, subjects, standard where 
+        Textual_Question.Uid = {} and
+        user.Uid = {} and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey""".format(int(session['UserID']),int(session['UserID'])))
+        q_data = cur.fetchall()
+        
+
+        
         cur.close()
         
-        return render_template("profile.html", UserData = data, route=['profile'])
+        return render_template("profile.html", UserData = u_data,Question_data=q_data, route=['profile'])
     return render_template("profile.html",  route=['profile'])
 
 # REGISTER ROUTE
@@ -107,40 +131,56 @@ def register():
         mysql.connection.commit()
         
         cur.close()
-        
+        flash('You are successfully Registered', 'success')
         return redirect('/login')
         
 
     return render_template("Register.html",form=form, route=['register'])
 
-# ROUTES ENDED
-# form classes
 
-# Register Form
-class RegistrationForm(Form):
-    username = TextField('User Name', [validators.length(min = 1, max=100),validators.DataRequired()])
-    name = TextField('Name', [validators.length(min = 4, max=35),validators.DataRequired()])
-    age = DateField('Birth Date')
-    email = TextField('Email Address', [validators.length(min=7,max=40),validators.DataRequired()])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.length(min=8),
-        validators.EqualTo('Confirm', message='Passwords do not match.'),
-    ])
-    Confirm = PasswordField('Confirm Password')
-    
-    def validate_username(self, username):
+# Ask Questions ROUTE 
+@app.route('/askQuestion', methods=['GET', 'POST'])
+def askQuestion():
+    if 'UserID' in session:
+        form = AskQuestionForm(request.form)
+        StdData = []
+        SubData = []
         cur = mysql.connection.cursor()
-        cur.execute("select UserName from user where UserName = %s", [username.data])
-        user = cur.fetchone()
-        cur.close()
-        if user:
-            raise ValidationError('That username is taken. Please choose another.')
-    
-#login Form
-class LoginForm(Form):
-    username = TextField("User Name",[validators.DataRequired()])
-    password = PasswordField("Password",[validators.DataRequired()])
+        
+        #got Subject data
+        cur.execute("Select StdKey, StdName from standard")
+        raw_std_data = cur.fetchall()
+        for i in raw_std_data:
+            j = (i['StdKey'],i['StdName'])
+            StdData.append(j)
+        
+        #got Standard data
+        cur.execute("Select SubKey, SubName from subjects")
+        raw_sub_data = cur.fetchall()
+        for i in raw_sub_data:
+            j = (i['SubKey'],i['SubName'])
+            SubData.append(j) 
+        
+        form.standard.choices = StdData
+        form.subject.choices = SubData
+
+
+        if request.method == 'POST' and form.validate():
+            Question = str(form.question.data)
+            Standard = str(form.standard.data)
+            Subject = str(form.subject.data)
+            Uid = session['UserID']
+            cur.execute("insert into Textual_Question(Uid, Question, standard, Subject) values(%s,%s,%s,%s)",(Uid,Question,Standard,Subject))
+            mysql.connection.commit()
+            cur.close()
+            flash("successfully asked",'success')
+    else:
+        flash("Please login before asking question.",'danger')
+        return redirect('/profile')
+    return render_template('AskQuestions.html',form=form)
+
+
+# ROUTES ENDED
 
 
 if __name__ == "__main__":
