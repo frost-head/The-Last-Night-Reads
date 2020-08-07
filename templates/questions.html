@@ -12,6 +12,9 @@
             <div  style="margin-top: 3%; "><a class="btn btn-outline-light" style="font-size: 3vmin;" href="/askQuestion">Ask Question</a></div>
         </div>
 
+        {% if Question_data is None%}
+            <p class='title-follow' style = "padding-top: 10vmin">No questions found </p>
+        {% endif %}
         <br>
         {% for data in Question_data %}
         <div class="card">

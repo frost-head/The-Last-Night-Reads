@@ -14,9 +14,12 @@
             <a class="btn btn-danger" href="/logout">Logout</a>
     </div>
             <div Id = "Question">
-
+                {% if Question_data %}
                 <p class='title-follow' style = "padding-top: 10vmin">You have asked following questions</p>
-        
+                {% else %}
+                <p class='title-follow' style = "padding-top: 10vmin">You have asked no questions yet.</p>
+                {% endif %}
+
                 {% for data in Question_data %}
                 <div class="card">
                     <div class="card-body">
