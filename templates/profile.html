@@ -5,23 +5,74 @@
 {% endblock %}
 
 {% block body %}
-<div class = "pull container anim">
-    <div class="jumbotron">
+<div class = "pull container anim " >
+    <div class="jumbotron" style = "background-color: #111111; color: #e1e1e1;">
         {% if 'UserID' in session:%}
             <h1 class = "fstyleNormal">Logged in as {{UserData['UserName']}}</h1>
             <h3 class = "fstyleNormal">Name : {{UserData['Name']}}</h3>
             <h3 class = "fstyleNormal">Registered On: {{UserData['RegisterDate']}}</h3>
             <a class="btn btn-danger" href="/logout">Logout</a>
+    </div>
+            <div Id = "Question">
+
+                <p class='title-follow' style = "padding-top: 10vmin">You have asked following questions</p>
+        
+                {% for data in Question_data %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
+                        <div class ="col-md-2 ml-auto">
+                            <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class ="col-md-2">
+                                <p class="User-date">On: {{data['PostDate']}}</p>
+                            </div>
+                            <div class ="col-md-3">
+                                <p class="User-date">Subject: {{data['SubName']}}</p>
+                            </div>
+                            <div class ="col-md-2">
+                                <p class="User-date">Standard: {{data['StdName']}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary User-date" style="width: 99%; " href="#">Answer</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+        
+                {% endfor %}
+            </div>
+
         {% else %}
             <h1 class="fstyleNormal">Not yet logged in</h1>
             <a class="btn btn-primary" href = "/login">Login</a>
             <a class="btn btn-success" href = "/register">Register</a>
         {% endif%}
     </div>
+
+
 </div>
 <style>
     .fstyleNormal{
         font-family: "Patrick Hand";
+    }
+    
+    .card-title{
+        font-size: 5.5vmin;
+    }
+    .User-date{
+        font-size: 2.5vmin;
+        font-family: "Patrick Hand";
+    }
+    
+    .card{
+        background-color: #111111;
+        color: #e1e1e1;
+        padding: 2vh;
     }
 
 

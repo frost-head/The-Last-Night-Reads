@@ -7,8 +7,9 @@
 {% block body %}
 <div id = "Question">
     <div class="container pull anim" >
-        <div class="sticky">
-            <h1 class="title ">Questions</h1>
+        <div >
+            <div ><p class="title">Questions</p></div>
+            <div  style="margin-top: 3%; "><a class="btn btn-outline-light" style="font-size: 3vmin;" href="/askQuestion">Ask Question</a></div>
         </div>
 
         <br>
@@ -16,28 +17,27 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                <div class="card-title col-md-10">{{data['Question']}}</div>
+                <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
                 <div class ="col-md-2 ml-auto">
-                    <p style = "font-size: 2.5vmin;">Likes - {{data['Likes']}}</p>
-                    <input type="button" class="btn btn-outline-danger User-date" value="Like" style="width: 90%;">
+                    <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
                 </div>
                 </div>
                 <div class="row">
                     <div class ="col-md-2">
-                        <p class="User-date">By- {{data['Username']}}</p>
+                        <p class="User-date">By: {{data['Username']}}</p>
                     </div>
                     <div class ="col-md-2">
                         <p class="User-date">On: {{data['PostDate']}}</p>
                     </div>
                     <div class ="col-md-3">
-                        <p class="User-date">Subject- {{data['SubName']}}</p>
+                        <p class="User-date">Subject: {{data['SubName']}}</p>
                     </div>
                     <div class ="col-md-2">
                         <p class="User-date">Standard: {{data['StdName']}}</p>
                     </div>
                 </div>
                 <div>
-                    <a class="btn btn-primary User-date" style="width: 98.6%; " href="#">Answer</a>
+                    <a class="btn btn-primary User-date" style="width: 99%; " href="#">Answer</a>
                 </div>
             </div>
         </div>
@@ -48,10 +48,11 @@
 </div>
 <style>
     .card-title{
-        font-size: 5vmin;
+        font-size: 5.5vmin;
     }
     .User-date{
-        font-size: 2vmin;
+        font-size: 2.5vmin;
+        font-family: "Patrick Hand";
     }
     
     .card{

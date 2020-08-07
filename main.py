@@ -51,7 +51,7 @@ def login():
             if sha256_crypt.verify(password_candidate,password):
                 session['UserID'] = uid
                 flash('Successfully logged in', 'success')
-                return redirect(url_for('showQuestions'))
+                return redirect(url_for('showProfile'))
             else:
                 flash('Invalid Log In','danger')
         else:
@@ -73,26 +73,39 @@ def logout():
 @app.route('/questions/')
 def showQuestions():
     cur = mysql.connection.cursor()
-    cur.execute("""Select Username, Question, StdName, SubName, PostDate, Likes from user
+    cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from user
     inner join Textual_Question, subjects, standard where 
     user.Uid = Textual_Question.Uid and
     Textual_Question.Subject = subjects.Subkey and
     Textual_Question.standard = standard.StdKey""")
     q_data = cur.fetchall()
+
+
+    cur.close()
     return render_template('questions.html', route=['questions'],Question_data=q_data)
 
 # PROFILE ROUTE
 
 
-@app.route('/profile/')
+@app.route('/profile/', methods=['GET','POST'])
 def showProfile():
     if "UserID" in session:
         cur = mysql.connection.cursor()
         cur.execute("select * from user where Uid = %s",[session['UserID']])
-        data = cur.fetchone()
+        u_data = cur.fetchone()
+        cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
+        inner join user, subjects, standard where 
+        Textual_Question.Uid = {} and
+        user.Uid = {} and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey""".format(int(session['UserID']),int(session['UserID'])))
+        q_data = cur.fetchall()
+        
+
+        
         cur.close()
         
-        return render_template("profile.html", UserData = data, route=['profile'])
+        return render_template("profile.html", UserData = u_data,Question_data=q_data, route=['profile'])
     return render_template("profile.html",  route=['profile'])
 
 # REGISTER ROUTE
