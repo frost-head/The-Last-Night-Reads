@@ -72,7 +72,14 @@ def logout():
 
 @app.route('/questions/')
 def showQuestions():
-    return render_template('questions.html', route=['questions'])
+    cur = mysql.connection.cursor()
+    cur.execute("""Select Username, Question, StdName, SubName, PostDate, Likes from user
+    inner join Textual_Question, subjects, standard where 
+    user.Uid = Textual_Question.Uid and
+    Textual_Question.Subject = subjects.Subkey and
+    Textual_Question.standard = standard.StdKey""")
+    q_data = cur.fetchall()
+    return render_template('questions.html', route=['questions'],Question_data=q_data)
 
 # PROFILE ROUTE
 
@@ -118,10 +125,10 @@ def register():
     return render_template("Register.html",form=form, route=['register'])
 
 
-# Ask Questions ROUTE 'UserID' in session
+# Ask Questions ROUTE 
 @app.route('/askQuestion', methods=['GET', 'POST'])
 def askQuestion():
-    if True:
+    if 'UserID' in session:
         form = AskQuestionForm(request.form)
         StdData = []
         SubData = []
@@ -153,7 +160,7 @@ def askQuestion():
             cur.execute("insert into Textual_Question(Uid, Question, standard, Subject) values(%s,%s,%s,%s)",(Uid,Question,Standard,Subject))
             mysql.connection.commit()
             cur.close()
-
+            flash("successfully asked",'success')
     else:
         flash("Please login before asking question.",'danger')
         return redirect('/profile')
@@ -161,7 +168,6 @@ def askQuestion():
 
 
 # ROUTES ENDED
-
 
 
 if __name__ == "__main__":

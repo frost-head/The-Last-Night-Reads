@@ -5,8 +5,59 @@
 {% endblock %}
 
 {% block body %}
-<div class="container pull anim">
-    <h1 class="title">Questions</h1>
-    <a href="/askQuestion" class="btn btn-primary">Ask Question</a>
+<div id = "Question">
+    <div class="container pull anim" >
+        <div class="sticky">
+            <h1 class="title ">Questions</h1>
+        </div>
+
+        <br>
+        {% for data in Question_data %}
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                <div class="card-title col-md-10">{{data['Question']}}</div>
+                <div class ="col-md-2 ml-auto">
+                    <p style = "font-size: 2.5vmin;">Likes - {{data['Likes']}}</p>
+                    <input type="button" class="btn btn-outline-danger User-date" value="Like" style="width: 90%;">
+                </div>
+                </div>
+                <div class="row">
+                    <div class ="col-md-2">
+                        <p class="User-date">By- {{data['Username']}}</p>
+                    </div>
+                    <div class ="col-md-2">
+                        <p class="User-date">On: {{data['PostDate']}}</p>
+                    </div>
+                    <div class ="col-md-3">
+                        <p class="User-date">Subject- {{data['SubName']}}</p>
+                    </div>
+                    <div class ="col-md-2">
+                        <p class="User-date">Standard: {{data['StdName']}}</p>
+                    </div>
+                </div>
+                <div>
+                    <a class="btn btn-primary User-date" style="width: 98.6%; " href="#">Answer</a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        {% endfor %}
+    </div>
 </div>
+<style>
+    .card-title{
+        font-size: 5vmin;
+    }
+    .User-date{
+        font-size: 2vmin;
+    }
+    
+    .card{
+        background-color: #111111;
+        color: #e1e1e1;
+        padding: 2vh;
+    }
+</style>
 {% endblock %}
