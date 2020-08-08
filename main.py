@@ -73,7 +73,7 @@ def logout():
 @app.route('/questions/')
 def showQuestions():
     cur = mysql.connection.cursor()
-    cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from user
+    cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
     inner join Textual_Question, subjects, standard where 
     user.Uid = Textual_Question.Uid and
     Textual_Question.Subject = subjects.Subkey and
@@ -93,7 +93,7 @@ def showProfile():
         cur = mysql.connection.cursor()
         cur.execute("select * from user where Uid = %s",[session['UserID']])
         u_data = cur.fetchone()
-        cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
         inner join user, subjects, standard where 
         Textual_Question.Uid = {} and
         user.Uid = {} and
@@ -179,6 +179,13 @@ def askQuestion():
         return redirect('/profile')
     return render_template('AskQuestions.html',form=form)
 
+@app.route('/answer/<Qid>', methods=['GET','POST'])
+def answer(Qid):
+    if 'UserID' in session:
+        return render_template('Answer.html')
+    else:
+        flash("Please loggin before answering", 'danger')
+        return redirect(url_for('showProfile'))
 
 # ROUTES ENDED
 
