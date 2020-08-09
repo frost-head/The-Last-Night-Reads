@@ -7,6 +7,7 @@ import os
 
 # CONFIG
 app = Flask(__name__)
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'TonyStark@439751'
@@ -174,6 +175,7 @@ def askQuestion():
             mysql.connection.commit()
             cur.close()
             flash("successfully asked",'success')
+            return redirect(url_for('showQuestions'))
     else:
         flash("Please login before asking question.",'danger')
         return redirect('/profile')
@@ -253,4 +255,4 @@ def question(Qid):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host= '0.0.0.0')
