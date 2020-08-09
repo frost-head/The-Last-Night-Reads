@@ -36,9 +36,16 @@ a_data - answer data
                         <div class="card-sub-title col-md-12 fstyleNormal" style = "padding: 0.5vmax;">
                             <p >{{data['Answer']}}</p>
                         </div>    
-                <div class="User-date">
-                    by: {{data['Username']}}</div>
+                <div class="row">
+                    <div class="User-date col-md-3">
+                        by: {{data['Username']}}
+                    </div>
+                    <div class="User-date col-md-3">
+                        on: {{data['PostDate']}}
+                    </div>
                 </div>
+            </div>
+            <br>
             {% endfor %}
         {% else %}
         <p class='title-follow' style = "padding-top: 5vmin">No Answers yet.</p>
