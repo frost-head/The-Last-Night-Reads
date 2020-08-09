@@ -17,33 +17,41 @@
         {% endif %}
         <br>
         {% for data in Question_data %}
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
-                <div class ="col-md-2 ml-auto">
-                    <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
-                </div>
-                </div>
-                <div class="row">
-                    <div class ="col-md-2">
-                        <p class="User-date">By: {{data['Username']}}</p>
+            <div class="card ">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
+                    <div class ="col-md-2 ml-auto">
+                        <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
                     </div>
-                    <div class ="col-md-2">
-                        <p class="User-date">On: {{data['PostDate']}}</p>
                     </div>
-                    <div class ="col-md-3">
-                        <p class="User-date">Subject: {{data['SubName']}}</p>
+                    <div class="row">
+                        <div class ="col-md-2">
+                            <p class="User-date">By: {{data['Username']}}</p>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="User-date">On: {{data['PostDate']}}</p>
+                        </div>
+                        <div class ="col-md-3">
+                            <p class="User-date">Subject: {{data['SubName']}}</p>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="User-date">Standard: {{data['StdName']}}</p>
+                        </div>
                     </div>
-                    <div class ="col-md-2">
-                        <p class="User-date">Standard: {{data['StdName']}}</p>
+                    <div class="row">
+                        <a class="btn btn-primary User-date col-md-5" style="width: 99%; padding: 0.5vmax;" href={{url_for('answer', Qid = data['Qid'])}}>Answer</a>
+                       
+                        <div class="col-md-2"></div>
+                        
+                        <a class="btn btn-primary User-date col-md-5" style="width: 99%; padding: 0.5vmax;" href={{url_for('question', Qid = data['Qid'])}}>Show Question</a>
+
+                        
                     </div>
-                </div>
-                <div>
-                    <a class="btn btn-primary User-date" style="width: 99%; " href="#">Answer</a>
+                    
                 </div>
             </div>
-        </div>
+        </a>
         <br>
 
         {% endfor %}

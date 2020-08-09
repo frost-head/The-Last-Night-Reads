@@ -35,3 +35,6 @@ class AskQuestionForm(Form):
     question  = TextAreaField("Question")
     standard = SelectField("Standard",validate_choice=False)
     subject = SelectField("Subject",validate_choice=False)
+
+class AnswerForm(Form):
+    answer = TextAreaField("Answer",[validators.DataRequired()])

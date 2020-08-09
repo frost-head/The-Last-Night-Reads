@@ -51,7 +51,7 @@ def login():
             if sha256_crypt.verify(password_candidate,password):
                 session['UserID'] = uid
                 flash('Successfully logged in', 'success')
-                return redirect(url_for('showProfile'))
+                return redirect(url_for('showQuestions'))
             else:
                 flash('Invalid Log In','danger')
         else:
@@ -73,7 +73,7 @@ def logout():
 @app.route('/questions/')
 def showQuestions():
     cur = mysql.connection.cursor()
-    cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from user
+    cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
     inner join Textual_Question, subjects, standard where 
     user.Uid = Textual_Question.Uid and
     Textual_Question.Subject = subjects.Subkey and
@@ -93,7 +93,7 @@ def showProfile():
         cur = mysql.connection.cursor()
         cur.execute("select * from user where Uid = %s",[session['UserID']])
         u_data = cur.fetchone()
-        cur.execute("""Select Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
         inner join user, subjects, standard where 
         Textual_Question.Uid = {} and
         user.Uid = {} and
@@ -179,6 +179,75 @@ def askQuestion():
         return redirect('/profile')
     return render_template('AskQuestions.html',form=form)
 
+@app.route('/answer/<Qid>', methods=['GET','POST'])
+def answer(Qid):
+    form = AnswerForm(request.form)
+    if 'UserID' in session:
+
+        cur = mysql.connection.cursor()
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+        inner join Textual_Question, subjects, standard where 
+        Textual_Question.Qid = {} and
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey""".format(Qid))
+        
+        q_data = cur.fetchone()
+
+        cur.execute("""
+        select Username, Answer,PostDate from user
+        inner join Textual_Answers 
+        where user.Uid = Textual_Answers.Uid and 
+        Textual_Answers.Qid = {} 
+        """.format(Qid))
+
+        a_data = cur.fetchall()
+
+        cur.close()
+        if request.method == 'POST':
+            answer = str(form.answer.data)
+            cur = mysql.connection.cursor()
+            cur.execute("""
+            insert into Textual_Answers(Qid, Uid ,Answer)values(%s,%s,%s)
+            """,(Qid, session['UserID'], answer))
+            Anscount = int(q_data['AnsCount']) + 1
+            cur.execute("""
+            UPDATE Textual_Question SET AnsCount = {} WHERE Textual_Question.Qid = {}
+            """.format(Anscount, Qid))
+            mysql.connection.commit()
+            cur.close()
+            return redirect('/answer/{}'.format(Qid))
+
+        return render_template('Answer.html',q_data=q_data,a_data=a_data,form=form)
+    else:
+        flash("Please loggin before answering", 'danger')
+        return redirect(url_for('showProfile'))
+
+# Indiviusdal Question route
+@app.route('/question/<Qid>', methods=['GET','POST'])
+def question(Qid):
+    cur = mysql.connection.cursor()
+    cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+    inner join Textual_Question, subjects, standard where 
+    Textual_Question.Qid = {} and
+    user.Uid = Textual_Question.Uid and
+    Textual_Question.Subject = subjects.Subkey and
+    Textual_Question.standard = standard.StdKey""".format(Qid))
+    
+    q_data = cur.fetchone()
+
+    cur.execute("""
+    select Username, Answer,PostDate from user
+    inner join Textual_Answers 
+    where user.Uid = Textual_Answers.Uid and 
+    Textual_Answers.Qid = {}
+    """.format(Qid))
+
+    a_data = cur.fetchall()
+
+    cur.close()
+    return render_template('indivisual_question.html',q_data=q_data,a_data=a_data)
+    
 
 # ROUTES ENDED
 
