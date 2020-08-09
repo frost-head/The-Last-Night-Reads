@@ -1,0 +1,72 @@
+<!---
+
+q_data - question data
+a_data - answer data
+
+-->
+
+<div class="card ">
+    <div class="card-body ">
+        <div class="row">
+        <div class="card-title col-md-10 fstyleNormal">{{q_data['Question']}}</div>
+        <div class ="col-md-2 ml-auto">
+            <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{q_data['AnsCount']}}</p>
+        </div>
+        </div>
+        <div class="row">
+            <div class ="col-md-2">
+                <p class="User-date">By: {{q_data['Username']}}</p>
+            </div>
+            <div class ="col-md-2">
+                <p class="User-date">On: {{q_data['PostDate']}}</p>
+            </div>
+            <div class ="col-md-3">
+                <p class="User-date">Subject: {{q_data['SubName']}}</p>
+            </div>
+            <div class ="col-md-2">
+                <p class="User-date">Standard: {{q_data['StdName']}}</p>
+            </div>
+        </div>
+        {% if a_data %}
+        <p class='title-follow' style = "padding-top: 5vmin">Here are Answers</p>
+            
+            {% for data in a_data %}
+                <div class="card" style="background-color: #191D30;
+                color: #e1e1e1;">
+                        <div class="card-sub-title col-md-12 fstyleNormal" style = "padding: 0.5vmax;">
+                            <p >{{data['Answer']}}</p>
+                        </div>    
+                <div class="User-date">
+                    by: {{data['Username']}}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+        <p class='title-follow' style = "padding-top: 5vmin">No Answers yet.</p>
+
+        {% endif %}
+    </div>
+</div>
+<style>
+    .fstyleNormal{
+        font-family: "Patrick Hand";
+    }
+    .card-sub-title{
+        font-size: 4vmin;
+    }
+    
+    .card-title{
+        font-size: 5.5vmin;
+    }
+    .User-date{
+        font-size: 2.5vmin;
+        font-family: "Patrick Hand";
+    }
+    
+    .card{
+        background-color: #111111;
+        color: #e1e1e1;
+        padding: 2vh;
+    }
+
+
+</style>

@@ -182,10 +182,57 @@ def askQuestion():
 @app.route('/answer/<Qid>', methods=['GET','POST'])
 def answer(Qid):
     if 'UserID' in session:
-        return render_template('Answer.html')
+
+        cur = mysql.connection.cursor()
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+        inner join Textual_Question, subjects, standard where 
+        Textual_Question.Qid = {} and
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey""".format(Qid))
+        
+        q_data = cur.fetchone()
+
+        cur.execute("""
+        select Username, Answer from user
+        inner join Answers 
+        where user.Uid = Answers.Uid and 
+        Answers.Qid = {} 
+        """.format(Qid))
+
+        a_data = cur.fetchall()
+
+        cur.close()
+        return render_template('Answer.html',q_data=q_data,a_data=a_data)
     else:
         flash("Please loggin before answering", 'danger')
         return redirect(url_for('showProfile'))
+
+# Indiviusdal Question route
+@app.route('/question/<Qid>', methods=['GET','POST'])
+def question(Qid):
+    cur = mysql.connection.cursor()
+    cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+    inner join Textual_Question, subjects, standard where 
+    Textual_Question.Qid = {} and
+    user.Uid = Textual_Question.Uid and
+    Textual_Question.Subject = subjects.Subkey and
+    Textual_Question.standard = standard.StdKey""".format(Qid))
+    
+    q_data = cur.fetchone()
+
+    cur.execute("""
+    select Username, Answer from user
+    inner join Answers 
+    where user.Uid = Answers.Uid and 
+    Answers.Qid = {} 
+    """.format(Qid))
+
+    a_data = cur.fetchall()
+
+    cur.close()
+    return render_template('indivisual_question.html',q_data=q_data,a_data=a_data)
+    
 
 # ROUTES ENDED
 

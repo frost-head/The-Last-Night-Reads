@@ -23,8 +23,9 @@
                 {% for data in Question_data %}
                 <div class="card">
                     <div class="card-body">
+                        <a class="stretched-link " href={{url_for('question', Qid = data['Qid'])}}></a>
                         <div class="row">
-                        <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
+                        <div class="card-title col-md-10 fstyleNormal">{{data['Question']}} </div>
                         <div class ="col-md-2 ml-auto">
                             <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
                         </div>
@@ -39,9 +40,6 @@
                             <div class ="col-md-2">
                                 <p class="User-date">Standard: {{data['StdName']}}</p>
                             </div>
-                        </div>
-                        <div>
-                            <a class="btn btn-primary User-date" style="width: 99%; " href="#">Answer</a>
                         </div>
                     </div>
                 </div>
