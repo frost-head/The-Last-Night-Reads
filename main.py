@@ -78,7 +78,9 @@ def showQuestions():
     inner join Textual_Question, subjects, standard where 
     user.Uid = Textual_Question.Uid and
     Textual_Question.Subject = subjects.Subkey and
-    Textual_Question.standard = standard.StdKey""")
+    Textual_Question.standard = standard.StdKey
+    ORDER BY PostDate desc
+    """)
     q_data = cur.fetchall()
 
 
@@ -99,7 +101,9 @@ def showProfile():
         Textual_Question.Uid = {} and
         user.Uid = {} and
         Textual_Question.Subject = subjects.Subkey and
-        Textual_Question.standard = standard.StdKey""".format(int(session['UserID']),int(session['UserID'])))
+        Textual_Question.standard = standard.StdKey
+        ORDER BY PostDate desc
+        """.format(int(session['UserID']),int(session['UserID'])))
         q_data = cur.fetchall()
         
 
@@ -234,7 +238,9 @@ def question(Qid):
     Textual_Question.Qid = {} and
     user.Uid = Textual_Question.Uid and
     Textual_Question.Subject = subjects.Subkey and
-    Textual_Question.standard = standard.StdKey""".format(Qid))
+    Textual_Question.standard = standard.StdKey
+    
+    """.format(Qid))
     
     q_data = cur.fetchone()
 
