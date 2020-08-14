@@ -31,12 +31,7 @@ def ShowHome():
 
 # LOGIN ROUTE
 
-<<<<<<< HEAD
-
-@app.route('/login/')
-=======
 @app.route('/login/', methods=['GET','POST'])
->>>>>>> 43d6fadff456d0cb76e0d72913513798cebb134a
 def login():
     form = LoginForm(request.form)
 
@@ -96,11 +91,7 @@ def showQuestions():
 # PROFILE ROUTE
 
 
-<<<<<<< HEAD
 @app.route('/profile/')
-=======
-@app.route('/profile/', methods=['GET','POST'])
->>>>>>> 43d6fadff456d0cb76e0d72913513798cebb134a
 def showProfile():
     if "UserID" in session:
         cur = mysql.connection.cursor()
@@ -126,11 +117,7 @@ def showProfile():
 # REGISTER ROUTE
 
 
-<<<<<<< HEAD
 @app.route('/register/')
-=======
-@app.route('/register/', methods=['GET','POST'])
->>>>>>> 43d6fadff456d0cb76e0d72913513798cebb134a
 def register():
 
     form = RegistrationForm(request.form)
