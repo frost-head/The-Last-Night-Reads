@@ -1,0 +1,13 @@
+{% extends 'Base.html' %}
+
+{% block body %}
+<div class="container" style="position: sticky;">
+    <div class="pull anim">{% include 'includes/Question.html' %}
+    </div>
+    <div>
+        <a class="btn btn-primary " style="width: 100%; padding: 0.5vmax;" href={{url_for('answer', Qid = q_data['Qid'])}}>Answer</a>
+    </div>
+</div>
+<br>
+
+{% endblock %}

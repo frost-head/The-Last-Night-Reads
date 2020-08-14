@@ -5,5 +5,37 @@
 {% endblock %}
 
 {% block body %}
-<h1>Login Page</h1>
+
+<div class="container pull anim">
+    
+    <form method="POST" action="" class="padall">
+        {% for element in form%}
+            <div class="form-group row ">
+                {{ element.label(class="Flabel col-sm-2 col-form-label") }} 
+                {{ element(class="form-control form-control  col-sm-6") }}
+            </div>
+            {% if element.errors %}
+                <ul class="errors err">{% for error in element.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+
+        {%endfor%}
+        <br>
+        <input class="btn btn-primary " type="submit" value="Login">
+    </form>
+</div>
+<style>
+    .Flabel{
+        font-size: 1.5vmax;
+        color: #e1e1e1;
+        font-family: "Patrick Hand";
+    }
+    .err{
+        font-size: 1vmax;
+        color: #ff5050;
+        font-family: "Patrick Hand";
+    }
+    .padall{
+        padding: 2vmax;
+    }
+</style>
 {% endblock %}

@@ -5,5 +5,73 @@
 {% endblock %}
 
 {% block body %}
-<h1>Questions</h1>
+<div id = "Question">
+    <div class="container pull anim" >
+        <div >
+            <div ><p class="title">Questions</p></div>
+            <div  style="margin-top: 3%; "><a class="btn btn-outline-light" style="font-size: 3vmin;" href="/askQuestion">Ask Question</a></div>
+        </div>
+
+        {% if Question_data == None%}
+            <p class='title-follow' style = "padding-top: 10vmin">No questions found </p>
+        {% endif %}
+        <br>
+        {% for data in Question_data %}
+            <div class="card ">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
+                    <div class ="col-md-2 ml-auto">
+                        <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class ="col-md-2">
+                            <p class="User-date">By: {{data['Username']}}</p>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="User-date">On: {{data['PostDate']}}</p>
+                        </div>
+                        <div class ="col-md-3">
+                            <p class="User-date">Subject: {{data['SubName']}}</p>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="User-date">Standard: {{data['StdName']}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-primary User-date col-md-5" style="width: 99%; padding: 0.5vmax;" href={{url_for('answer', Qid = data['Qid'])}}>Answer</a>
+                       
+                        <div class="col-md-2">
+                            <br>
+                        </div>
+                        
+                        <a class="btn btn-primary User-date col-md-5" style="width: 99%; padding: 0.5vmax;" href={{url_for('question', Qid = data['Qid'])}}>Show Question</a>
+
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </a>
+        <br>
+
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .card-title{
+        font-size: 7vmin;
+    }
+    .User-date{
+        font-size: 2.5vmin;
+        font-family: "Patrick Hand";
+    }
+    
+    .card{
+        background-color: #111111;
+        color: #e1e1e1;
+        padding: 2vh;
+    }
+</style>
 {% endblock %}
