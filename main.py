@@ -94,9 +94,11 @@ def showQuestions():
 def showProfile():
     if "UserID" in session:
         cur = mysql.connection.cursor()
+        
         cur.execute("select * from user where Uid = %s",[session['UserID']])
         u_data = cur.fetchone()
-        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
+        
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate from Textual_Question
         inner join user, subjects, standard where 
         Textual_Question.Uid = {} and
         user.Uid = {} and
@@ -106,11 +108,20 @@ def showProfile():
         """.format(int(session['UserID']),int(session['UserID'])))
         q_data = cur.fetchall()
         
-
+        cur.execute("""
+        Select Textual_Question.Qid, Textual_Question.PostDate, Username, Question, StdName, SubName from Textual_Question
+        inner join user, subjects, standard,Textual_Answers where 
+        Textual_Answers.Uid = {} and
+        Textual_Question.Qid = Textual_Answers.Qid and
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey
+        """.format(int(session['UserID'])))
+        a_data = cur.fetchall()
         
         cur.close()
         
-        return render_template("profile.html", UserData = u_data,Question_data=q_data, route=['profile'])
+        return render_template("profile.html", UserData = u_data,Question_data=q_data,Answer_data=a_data, route=['profile'])
     return render_template("profile.html",  route=['profile'])
 
 # REGISTER ROUTE
