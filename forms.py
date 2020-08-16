@@ -28,6 +28,7 @@ class RegistrationForm(Form):
 class LoginForm(Form):
     username = TextField("User Name",[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
+    remember_me = BooleanField("Remember Me")
 
 # AskQuestion form
 class AskQuestionForm(Form):

@@ -51,6 +51,8 @@ def login():
 
             if sha256_crypt.verify(password_candidate,password):
                 session['UserID'] = uid
+                if form.remember_me.data == True:
+                    session.permanent = True
                 flash('Successfully logged in', 'success')
                 return redirect(url_for('showQuestions'))
             else:
@@ -98,7 +100,7 @@ def showProfile():
         cur.execute("select * from user where Uid = %s",[session['UserID']])
         u_data = cur.fetchone()
         
-        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate from Textual_Question
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
         inner join user, subjects, standard where 
         Textual_Question.Uid = {} and
         user.Uid = {} and
@@ -109,7 +111,7 @@ def showProfile():
         q_data = cur.fetchall()
         
         cur.execute("""
-        Select Textual_Question.Qid, Textual_Question.PostDate, Username, Question, StdName, SubName from Textual_Question
+        Select Textual_Question.Qid, Textual_Question.PostDate, AnsCount, Username, Question, StdName, SubName from Textual_Question
         inner join user, subjects, standard,Textual_Answers where 
         Textual_Answers.Uid = {} and
         Textual_Question.Qid = Textual_Answers.Qid and
@@ -122,6 +124,9 @@ def showProfile():
         cur.close()
         
         return render_template("profile.html", UserData = u_data,Question_data=q_data,Answer_data=a_data, route=['profile'])
+    else:
+        return redirect('/login')
+    
     return render_template("profile.html",  route=['profile'])
 
 # REGISTER ROUTE
