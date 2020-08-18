@@ -7,12 +7,15 @@
 {% block body %}
 
 <div class="container pull anim">
+
+    <div class="separator" style="color: #e1e1e1; font-size: 2vmax; ">Login</div>
+    <p class="small-text" style="color: #e1e1e1; font-family: 'Quicksand',sans-serif; margin-left: 2vmax;"><small> Fill the following form to Login</small></p>
     
     <form method="POST" action="" class="padall">
         {% for element in form%}
             <div class="form-group row ">
                 {{ element.label(class="Flabel col-sm-2 col-form-label") }} 
-                {{ element(class="form-control form-control  col-sm-6") }}
+                {{ element(class="form-control col-sm-6") }}
             </div>
             {% if element.errors %}
                 <ul class="errors err">{% for error in element.errors %}<li>{{ error }}</li>{% endfor %}</ul>
@@ -28,15 +31,34 @@
     .Flabel{
         font-size: 1.5vmax;
         color: #e1e1e1;
-        font-family: "Patrick Hand";
+        font-family: "Quicksand",sans-serif;
     }
     .err{
         font-size: 1vmax;
         color: #ff5050;
-        font-family: "Patrick Hand";
+        font-family: "Quicksand",sans-serif;
     }
     .padall{
         padding: 2vmax;
+    }
+
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
     }
 </style>
 {% endblock %}
