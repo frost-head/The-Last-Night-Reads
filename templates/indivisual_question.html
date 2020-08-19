@@ -2,12 +2,43 @@
 
 {% block body %}
 <div class="container" style="position: sticky;">
-    <div class="pull anim">{% include 'includes/Question.html' %}
+    <div class="pull anim">
+        <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">Question</div>
+        {% include 'includes/Question.html' %}
     </div>
     <div>
-        <a class="btn btn-primary " style="width: 100%; padding: 0.5vmax;" href={{url_for('answer', Qid = q_data['Qid'])}}>Answer</a>
+        <a class="btn btn-primary HelpBolck" style="width: 100%; padding: 0.5vmax;" href={{url_for('answer', Qid = q_data['Qid'])}}>Answer</a>
     </div>
 </div>
 <br>
+<style>
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
+    }
+    .padall{
+        padding: 2vmax;
+    }
+    .pull{
+        margin-top: 5vmax;
+    }
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
+    }
+</style>
 
 {% endblock %}
