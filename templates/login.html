@@ -8,49 +8,49 @@
 
 <div class="container pull anim">
 
-    <div class="separator" style="color: #e1e1e1; font-size: 2vmax; ">Login</div>
+    <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">Login</div>
     <p class="small-text" style="color: #e1e1e1; font-family: 'Quicksand',sans-serif; margin-left: 2vmax;"><small> Fill the following form to Login</small></p>
     
     <form method="POST" action="" class="padall">
         {% for element in form%}
         <div class="form-group row">
 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 {{ element.label(class="Flabel col-form-label") }}   
                 <br>
                 {% if element.errors %}
                 <small id="passwordHelpBlock" class="form-text text-muted">
-                    <ul class="err ">{% for error in element.errors %}<small><li >{{ error }}</li></small>{% endfor %}</ul>
+                    <ul class="err HelpBolck">{% for error in element.errors %}<li >{{ error }}</li>{% endfor %}</ul>
                 </small>
                     
                 {% else %}
-                <small id="passwordHelpBlock" class="form-text text-muted">
+                <small id="passwordHelpBlock" class="form-text text-muted HelpBolck">
                     {{element.description}}
                 </small>
                 {% endif %}           
             </div>
             {{ element(class="form-control form-control col-sm-6") }}
-            
-
-            
+        
         </div>
-
         {%endfor%}
         <br>
-        <input class="btn btn-primary " type="submit" value="Login">
-        <a class="btn btn-success" href = "/register">Register</a>
+        <input class="btn btn-primary HelpBolck" type="submit" value="Login">
+        <a class="btn btn-success HelpBolck" href = "/register">Register</a>
     </form>
 </div>
 <style>
     .Flabel{
-        font-size: 1.5vmax;
+        font-size: 2vmax;
         color: #e1e1e1;
         font-family: "Quicksand",sans-serif;
+        font-weight:550;
     }
     .err{
-        font-size: 1vmax;
         color: #ff5050;
         font-family: "Quicksand",sans-serif;
+    }
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
     }
     .padall{
         padding: 2vmax;

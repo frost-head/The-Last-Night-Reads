@@ -39,4 +39,4 @@ class AskQuestionForm(Form):
     subject = SelectField("Subject",validate_choice=False,description="Select the Subject of Question")
 
 class AnswerForm(Form):
-    answer = TextAreaField("Answer",[validators.DataRequired()],descriptio="Type your Answer in the following field")
+    answer = TextAreaField("Answer",[validators.DataRequired()],description="Type your Answer in the following field")
