@@ -9,6 +9,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href={{url_for('static',filename="style.css")}}>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon1.ico') }}">
     
     {% block head %} {% endblock %}
 </head>
@@ -70,6 +71,8 @@
             width: 100%;
             padding-left: 2vw;
             padding-right: 2vw;
+            size: 1vmin;
+            font-family: 'Quicksand',sans-serif;
         }
         
     </style>
