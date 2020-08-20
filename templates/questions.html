@@ -9,15 +9,17 @@
     <div class="container anim" >
         <div >
             <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">Questions</div>
+            
             <div class="row" >
-                
                 <p class="col-md-5" style="color: #e1e1e1; font-family: 'Quicksand',sans-serif; margin-left: 2vmax;margin-top: .2vmax;"><small> By Answering Questions Help your fellow students!</small></p> 
                 <hr>
-                <div class="col-md-2"><a class="btn btn-outline-light"  href="/askQuestion">Ask Question</a></div>
-
+                <div class="row col-md-5">
+                    <a class="btn btn-outline-light HelpBolck" style="margin-left: 15vmax;"  href="/askQuestion">Ask Question</a>
+                    <a class="btn btn-outline-light HelpBolck" style="margin-left: 1vmax;" href="/search">Search</a>
+                </div>
             </div>
         </div>
-
+        
         {% if Question_data == None%}
             <p class='card-title ' style = "padding-top: 10vmin">No questions found </p>
         {% endif %}

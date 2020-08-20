@@ -272,6 +272,49 @@ def question(Qid):
     cur.close()
     return render_template('indivisual_question.html',q_data=q_data,a_data=a_data)
     
+@app.route('/search/',methods=['GET','POST'])
+def search():
+    form = SearchForm(request.form)
+    if request.method == 'POST':
+        query = str(form.search.data)
+        ls = query.split()
+        cancle = {'what','why','is','a','of'}
+        st = []
+        for i in ls:
+            if i.lower() in cancle:
+                pass
+            else:
+                st.append(f'{i}')
+        string = '|'.join(st)
+        print(string)
+
+
+        cur = mysql.connection.cursor()
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+        inner join Textual_Question, subjects, standard  where 
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey and 
+        Textual_Question.Question REGEXP '{}' or '{}' 
+        """.format(string,query))
+        q_data = cur.fetchall()
+        cur.close()
+        return render_template('search.html',route=['search'],form=form,Question_data=q_data)
+    else:
+        cur = mysql.connection.cursor()
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+        inner join Textual_Question, subjects, standard where 
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey
+        ORDER BY PostDate desc
+        """)
+        q_data = cur.fetchall()
+
+
+        cur.close()
+        return render_template('search.html',Question_data=q_data,route=['search'], form=form)
+
 
 # ROUTES ENDED
 

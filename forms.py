@@ -8,6 +8,7 @@ class RegistrationForm(Form):
     username = TextField('User Name', [validators.length(min = 1, max=100),validators.DataRequired()],description="Please enter a unique Username")
     name = TextField('Name', [validators.length(min = 4, max=35),validators.DataRequired()],description="Please enter Your full Name")
     age = DateField('Birth Date',description="Please enter your DOB in YYYY-MM-DD format")
+
     email = TextField('Email Address', [validators.length(min=7,max=40),validators.DataRequired()], description="Please enter your Email address")
     password = PasswordField('Password', [
         validators.DataRequired(),
@@ -40,3 +41,6 @@ class AskQuestionForm(Form):
 
 class AnswerForm(Form):
     answer = TextAreaField("Answer",[validators.DataRequired()],description="Type your Answer in the following field")
+
+class SearchForm(Form):
+    search = TextAreaField('Search', [validators.DataRequired()], description="Type your Question in the following field. Recomended to type tags like 'projectile'")
