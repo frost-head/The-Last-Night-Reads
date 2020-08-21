@@ -26,6 +26,8 @@ mysql.init_app(app)
 @app.route('/')
 @app.route('/home/')
 def ShowHome():
+    if datetime.now() <= datetime(year=2020,month=8,day=21,hour=21,minute=21):
+        return render_template('lock.html',route=['disable'])
     return render_template('Home.html', route=['/', 'home'])
 
 # LOGIN ROUTE
@@ -278,7 +280,7 @@ def search():
     if request.method == 'POST':
         query = str(form.search.data)
         ls = query.split()
-        cancle = {'what','why','is','a','of'}
+        cancle = {'what','why','how','could','should','may','the','be','which','will','are','for','at','is','a','of','been','it','would'}
         st = []
         for i in ls:
             if i.lower() in cancle:
@@ -286,17 +288,25 @@ def search():
             else:
                 st.append(f'{i}')
         string = '|'.join(st)
-        print(string)
 
-
-        cur = mysql.connection.cursor()
-        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
-        inner join Textual_Question, subjects, standard  where 
-        user.Uid = Textual_Question.Uid and
-        Textual_Question.Subject = subjects.Subkey and
-        Textual_Question.standard = standard.StdKey and 
-        Textual_Question.Question REGEXP '{}' or '{}' 
-        """.format(string,query))
+        if string:
+            cur = mysql.connection.cursor()
+            cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+            inner join Textual_Question, subjects, standard  where 
+            user.Uid = Textual_Question.Uid and
+            Textual_Question.Subject = subjects.Subkey and
+            Textual_Question.standard = standard.StdKey and 
+            Textual_Question.Question REGEXP '{}' or '{}' 
+            """.format(string,query))
+        else:
+            cur = mysql.connection.cursor()
+            cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+            inner join Textual_Question, subjects, standard  where 
+            user.Uid = Textual_Question.Uid and
+            Textual_Question.Subject = subjects.Subkey and
+            Textual_Question.standard = standard.StdKey and 
+            Textual_Question.Question REGEXP '{}'  
+            """.format(query))
         q_data = cur.fetchall()
         cur.close()
         return render_template('search.html',route=['search'],form=form,Question_data=q_data)
@@ -314,6 +324,14 @@ def search():
 
         cur.close()
         return render_template('search.html',Question_data=q_data,route=['search'], form=form)
+
+@app.route('/technologies/')
+def technologies():
+    return render_template('technologies.html')
+
+@app.route('/acknowledgement/')
+def technology():
+    return render_template('acknowledgement.html')
 
 
 # ROUTES ENDED
