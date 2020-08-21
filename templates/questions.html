@@ -6,47 +6,57 @@
 
 {% block body %}
 <div id = "Question">
-    <div class="container pull anim" >
+    <div class="container anim" >
         <div >
-            <div ><p class="title">Questions</p></div>
-            <div  style="margin-top: 3%; "><a class="btn btn-outline-light" style="font-size: 3vmin;" href="/askQuestion">Ask Question</a></div>
+            <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">Questions</div>
+            
+            <div class="row" >
+                <p class="col-md-5" style="color: #e1e1e1; font-family: 'Quicksand',sans-serif; margin-left: 2vmax;margin-top: .2vmax;"><small> By Answering Questions Help your fellow students!</small></p> 
+                <hr>
+                <div class="col-md-5">
+                    <div class="row ">
+                        <a class="btn btn-outline-light HelpBolck" style="margin-left: 15vmax;"  href="/askQuestion">Ask Question</a>
+                        <a class="btn btn-outline-light HelpBolck" style="margin-left: 1vmax;" href="/search">Search</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
+        
         {% if Question_data == None%}
-            <p class='title-follow' style = "padding-top: 10vmin">No questions found </p>
+            <p class='card-title ' style = "padding-top: 10vmin">No questions found </p>
         {% endif %}
         <br>
         {% for data in Question_data %}
             <div class="card ">
                 <div class="card-body">
                     <div class="row">
-                    <div class="card-title col-md-10 fstyleNormal">{{data['Question']}}</div>
-                    <div class ="col-md-2 ml-auto">
-                        <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
-                    </div>
+                        <div class="card-title col-md-10">{{data['Question']}} </div>
+                        <div class ="col-md-2 ml-auto">
+                            <p style = "font-size: 2.75vmin; padding: .5vmin; font-family:'Quicksand', sans-serif;" >Answers - {{data['AnsCount']}}</p>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class ="col-md-2">
+                        <div class ="col-md-3">
                             <p class="User-date">By: {{data['Username']}}</p>
                         </div>
-                        <div class ="col-md-2">
+                        <div class ="col-md-3">
                             <p class="User-date">On: {{data['PostDate']}}</p>
                         </div>
                         <div class ="col-md-3">
                             <p class="User-date">Subject: {{data['SubName']}}</p>
                         </div>
-                        <div class ="col-md-2">
+                        <div class ="col-md-3">
                             <p class="User-date">Standard: {{data['StdName']}}</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <a class="btn btn-primary User-date col-md-5" style="width: 99%; padding: 0.5vmax;" href={{url_for('answer', Qid = data['Qid'])}}>Answer</a>
+                    <div class="row" style = "padding-top: 1.5vmin">
+                        <a class="btn btn-primary User-date col-md-5 HelpBolck" style="width: 99%; padding: 0.5vmax;" href={{url_for('answer', Qid = data['Qid'])}}>Answer</a>
                        
                         <div class="col-md-2">
                             <br>
                         </div>
                         
-                        <a class="btn btn-primary User-date col-md-5" style="width: 99%; padding: 0.5vmax;" href={{url_for('question', Qid = data['Qid'])}}>Show Question</a>
+                        <a class="btn btn-primary User-date col-md-5 HelpBolck" style="width: 99%; padding: 0.5vmax;" href={{url_for('question', Qid = data['Qid'])}}>Show Question</a>
 
                         
                     </div>
@@ -60,18 +70,52 @@
     </div>
 </div>
 <style>
+
     .card-title{
-        font-size: 7vmin;
+        font-size: 5.5vmin;
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 500;
     }
     .User-date{
-        font-size: 2.5vmin;
-        font-family: "Patrick Hand";
+        font-size: 2vmin;
+        font-family: 'Quicksand', sans-serif;
     }
-    
     .card{
         background-color: #111111;
         color: #e1e1e1;
         padding: 2vh;
     }
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 600;
+    }
+
+    .title-follow{
+        margin-top: 10vmin;
+        color:#e1e1e1;
+        font-family: 'Quciksand',sans-serif;
+        font-size: 2vmax;
+    }
+
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
+    }
+
 </style>
+{% include 'includes/footer.html' %}
 {% endblock %}

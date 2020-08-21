@@ -26,6 +26,8 @@ mysql.init_app(app)
 @app.route('/')
 @app.route('/home/')
 def ShowHome():
+    if datetime.now() <= datetime(year=2020,month=8,day=21,hour=21,minute=21):
+        return render_template('lock.html',route=['disable'])
     return render_template('Home.html', route=['/', 'home'])
 
 # LOGIN ROUTE
@@ -51,6 +53,8 @@ def login():
 
             if sha256_crypt.verify(password_candidate,password):
                 session['UserID'] = uid
+                if form.remember_me.data == True:
+                    session.permanent = True
                 flash('Successfully logged in', 'success')
                 return redirect(url_for('showQuestions'))
             else:
@@ -94,8 +98,10 @@ def showQuestions():
 def showProfile():
     if "UserID" in session:
         cur = mysql.connection.cursor()
+        
         cur.execute("select * from user where Uid = %s",[session['UserID']])
         u_data = cur.fetchone()
+        
         cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from Textual_Question
         inner join user, subjects, standard where 
         Textual_Question.Uid = {} and
@@ -106,11 +112,23 @@ def showProfile():
         """.format(int(session['UserID']),int(session['UserID'])))
         q_data = cur.fetchall()
         
-
+        cur.execute("""
+        Select Textual_Question.Qid, Textual_Question.PostDate, AnsCount, Username, Question, StdName, SubName from Textual_Question
+        inner join user, subjects, standard,Textual_Answers where 
+        Textual_Answers.Uid = {} and
+        Textual_Question.Qid = Textual_Answers.Qid and
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey
+        """.format(int(session['UserID'])))
+        a_data = cur.fetchall()
         
         cur.close()
         
-        return render_template("profile.html", UserData = u_data,Question_data=q_data, route=['profile'])
+        return render_template("profile.html", UserData = u_data,Question_data=q_data,Answer_data=a_data, route=['profile'])
+    else:
+        return redirect('/login')
+    
     return render_template("profile.html",  route=['profile'])
 
 # REGISTER ROUTE
@@ -256,6 +274,65 @@ def question(Qid):
     cur.close()
     return render_template('indivisual_question.html',q_data=q_data,a_data=a_data)
     
+@app.route('/search/',methods=['GET','POST'])
+def search():
+    form = SearchForm(request.form)
+    if request.method == 'POST':
+        query = str(form.search.data)
+        ls = query.split()
+        cancle = {'what','why','how','could','should','may','the','be','which','will','are','for','at','is','a','of','been','it','would'}
+        st = []
+        for i in ls:
+            if i.lower() in cancle:
+                pass
+            else:
+                st.append(f'{i}')
+        string = '|'.join(st)
+
+        if string:
+            cur = mysql.connection.cursor()
+            cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+            inner join Textual_Question, subjects, standard  where 
+            user.Uid = Textual_Question.Uid and
+            Textual_Question.Subject = subjects.Subkey and
+            Textual_Question.standard = standard.StdKey and 
+            Textual_Question.Question REGEXP '{}' or '{}' 
+            """.format(string,query))
+        else:
+            cur = mysql.connection.cursor()
+            cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+            inner join Textual_Question, subjects, standard  where 
+            user.Uid = Textual_Question.Uid and
+            Textual_Question.Subject = subjects.Subkey and
+            Textual_Question.standard = standard.StdKey and 
+            Textual_Question.Question REGEXP '{}'  
+            """.format(query))
+        q_data = cur.fetchall()
+        cur.close()
+        return render_template('search.html',route=['search'],form=form,Question_data=q_data)
+    else:
+        cur = mysql.connection.cursor()
+        cur.execute("""Select Qid, Username, Question, StdName, SubName, PostDate, AnsCount from user
+        inner join Textual_Question, subjects, standard where 
+        user.Uid = Textual_Question.Uid and
+        Textual_Question.Subject = subjects.Subkey and
+        Textual_Question.standard = standard.StdKey
+        ORDER BY PostDate desc
+        """)
+        q_data = cur.fetchall()
+
+
+        cur.close()
+        return render_template('search.html',Question_data=q_data,route=['search'], form=form)
+
+@app.route('/technologies/')
+def technologies():
+    return render_template('technologies.html')
+
+@app.route('/acknowledgement/')
+def technology():
+    return render_template('acknowledgement.html')
+
 
 # ROUTES ENDED
 

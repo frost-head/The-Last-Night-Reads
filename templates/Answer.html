@@ -1,40 +1,84 @@
 {% extends 'Base.html' %}
 
+{% block head %}
+<title>Answer</title>
+{% endblock %}
+
 {% block body %}
 <div class="container" style="position: sticky;">
     <div class="pull anim">
+        <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">Answer</div>
         {% include 'includes/Question.html' %}
+        
         <div class="card" style = "margin-top: 5vmin ;margin-bottom: 5vmin;">
             <form method="POST" action="" class="padall">
                 {% for element in form%}
-                    <div class="form-group row ">
-                        {{ element.label(class="Flabel col-sm-2 col-form-label") }} 
-                        {{ element(class="form-control form-control  col-sm-6") }}
+                <div class="form-group row">
+
+                    <div class="col-sm-4">
+                        {{ element.label(class="Flabel col-form-label") }}   
+                        <br>
+                        {% if element.errors %}
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            <ul class="err HelpBolck">{% for error in element.errors %}<li >{{ error }}</li>{% endfor %}</ul>
+                        </small>
+                            
+                        {% else %}
+                        <small id="passwordHelpBlock" class="form-text text-muted HelpBolck">
+                            {{element.description}}
+                        </small>
+                        {% endif %}           
                     </div>
-                    {% if element.errors %}
-                        <ul class="errors err">{% for error in element.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                    {% endif %}
+                    {{ element(class="form-control form-control col-sm-6") }}
+                
+                </div>
 
                 {%endfor%}
                 <br>
-            <input class="btn btn-primary " type="submit" value="Post">
+            <input class="btn btn-primary HelpBolck" type="submit" value="Post">
             </form>
         </div> 
     </div>
 </div>
+
 <style>
     .Flabel{
-        font-size: 1.5vmax;
+        font-size: 2vmax;
         color: #e1e1e1;
-        font-family: "Patrick Hand";
+        font-family: "Quicksand",sans-serif;
+        font-weight:550;
     }
     .err{
-        font-size: 1vmax;
         color: #ff5050;
-        font-family: "Patrick Hand";
+        font-family: "Quicksand",sans-serif;
+    }
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
     }
     .padall{
         padding: 2vmax;
     }
+    .pull{
+        margin-top: 5vmax;
+    }
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
+    }
 </style>
+{% include 'includes/footer.html' %}
 {% endblock %}

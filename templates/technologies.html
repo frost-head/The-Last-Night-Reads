@@ -1,0 +1,68 @@
+{% extends 'Base.html' %}
+
+{% block head %}
+<title>Technology</title>
+{% endblock %}
+{% block body %}
+<diV class="container">
+    <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">
+        Technologies
+    </div>
+    <br>
+    <div class="HelpBolck" style="color: #e1e1e1; font-size: 1.5vmax; text-justify: auto;">
+        I would like to thank everyone who worked on the technologies used in LNR. you guys are just great, You are providing other developers the tools that they require to build stuning software for the end users thank you very much. we indie developers really apreciate your work. 
+        
+    
+        <div class="container">
+            <h1 class="HelpBolck text-center" style="color: #e1e1e1; margin-top: 2vmax;">Following technologies are used in LNR</h1>
+            <ul class="HelpBolck" style="color: #e1e1e1; font-size: 1.25vmax;">
+                <li>Flask</li>
+                <li>Flask Mysqldb</li>
+                <li>WT-Forms</li>
+                <li>Bootstrap</li>
+                <li>Google Fonts</li>
+                <li>Pythonanywhere.com</li>
+                <li>Youtube</li>
+            </ul>
+            
+            <h1 class="HelpBolck text-center" style="color: #e1e1e1;">Thank you all for your support</h1>
+        </div>
+    </div>
+</diV>
+
+<style>
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
+    }
+    .padall{
+        padding: 2vmax;
+    }
+    .Flabel{
+        font-size: 2vmax;
+        color: #e1e1e1;
+        font-family: "Quicksand",sans-serif;
+        font-weight:550;
+    }
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
+    }
+</style>
+
+
+{% include 'includes/footer.html' %}
+{% endblock %}

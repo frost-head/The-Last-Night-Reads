@@ -8,9 +8,9 @@ a_data - answer data
 <div class="card ">
     <div class="card-body ">
         <div class="row">
-        <div class="card-title col-md-10 fstyleNormal">{{q_data['Question']}}</div>
+        <div class="card-title col-md-10 ">{{q_data['Question']}}</div>
         <div class ="col-md-2 ml-auto">
-            <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{q_data['AnsCount']}}</p>
+            <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Quicksand',sans-serif;" >Answers - {{q_data['AnsCount']}}</p>
         </div>
         </div>
         <div class="row">
@@ -28,12 +28,12 @@ a_data - answer data
             </div>
         </div>
         {% if a_data %}
-        <p class='title-follow' style = "padding-top: 5vmin">Here are Answers</p>
+        <p class='title-follow'  >Here are Answers</p>
             
             {% for data in a_data %}
                 <div class="card" style="background-color: #191D30;
                 color: #e1e1e1;">
-                        <div class="card-sub-title col-md-12 fstyleNormal" style = "padding: 0.5vmax;">
+                        <div class=" col-md-12 "  style = "font-size: 3.5vmin; padding: 0.5vmin; font-family: 'Quicksand',sans-serif;">
                             <p >{{data['Answer']}}</p>
                         </div>    
                 <div class="row">
@@ -48,32 +48,37 @@ a_data - answer data
             <br>
             {% endfor %}
         {% else %}
-        <p class='title-follow' style = "padding-top: 5vmin">No Answers yet.</p>
+        <p class='title-follow'  >No Answers yet.</p>
         
         {% endif %}
     </div>
 </div>
 <style>
-    .fstyleNormal{
-        font-family: "Patrick Hand";
-    }
-    .card-sub-title{
-        font-size: 5.5vmin;
-    }
-    
     .card-title{
-        font-size: 7.5vmin;
+        font-size: 5.5vmin;
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 500;
     }
     .User-date{
-        font-size: 2.5vmin;
-        font-family: "Patrick Hand";
+        font-size: 2vmin;
+        font-family: 'Quicksand', sans-serif;
     }
-    
     .card{
         background-color: #111111;
         color: #e1e1e1;
         padding: 2vh;
+        margin-top: 1vmin;
     }
+
+    .title-follow{
+        margin-top: 5vmin;
+        color:#e1e1e1;
+        font-family: 'Quciksand',sans-serif;
+        font-size: 2vmax;
+    }
+    
+    
+
 
 
 </style>

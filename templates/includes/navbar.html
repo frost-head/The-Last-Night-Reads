@@ -6,9 +6,9 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse anim3" id="navbarNav">
-            <ul class="navbar-nav w-100 mr-auto">
+        
+        <div class="collapse navbar-collapse anim3 justify-content-start" id="navbarNav">
+            <ul class="navbar-nav ">
 
                 {% if 'home' in route%}
                 <!--home-->
@@ -37,10 +37,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
+            
 
-                <li class="nav-item ml-auto">
-                    <a class="btn btn-outline-light " href="/askQuestion">Ask Question</a>
-                </li>
 
                 {% elif 'profile' in route %}
                 <!--home-->
@@ -55,6 +53,21 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
+                
+                {% elif 'disable' in route %}
+                <!--home-->
+                <li class="nav-item ">
+                    <a class="nav-link disabled" href="/home">Home </a>
+                </li>
+                <!--questions-->
+                <li class="nav-item ">
+                    <a class="nav-link disabled" href="/questions">Questions</a>
+                </li>
+                <!--profile-->
+                <li class="nav-item ">
+                    <a class="nav-link disabled" href="/profile">Profile</a>
+                </li>
+            
                 {% else %}
                 <!--home-->
                 <li class="nav-item">
@@ -69,9 +82,22 @@
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 {% endif %}
-
+                
             </ul>
+        {% if 'search'  in route %}
+        {% elif 'questions' in route %}
+        {% elif 'disable' in route %}
+        {% else %}
+        <ul class="nav ml-auto">
+            <li>
+                <a class="btn btn-outline-light" href="/search">Search</a>
+            </li>
+        </ul>
+        
+        {% endif %}
+            
         </div>
+       
     </nav>
 </section>
 

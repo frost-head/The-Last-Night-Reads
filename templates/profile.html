@@ -6,18 +6,50 @@
 
 {% block body %}
 <div class = "pull container anim " >
-    <div class="jumbotron" style = "background-color: #111111; color: #e1e1e1;">
+    <div class="jumbotron" style="padding:3.5vmax">
         {% if 'UserID' in session:%}
-            <h1 class = "fstyleNormal">Logged in as {{UserData['UserName']}}</h1>
-            <h3 class = "fstyleNormal">Name : {{UserData['Name']}}</h3>
-            <h3 class = "fstyleNormal">Registered On: {{UserData['RegisterDate']}}</h3>
-            <a class="btn btn-danger" href="/logout">Logout</a>
+            <p class = "username text-center">{{UserData['UserName']}}</p>
+            <div class="separator">User Info</div>
+            <div style="font-family: 'Quicksand',sans-serif; font-size: 4.25vmin;">Name : {{UserData['Name']}}</div>
+            
+            <div style="font-family: 'Quicksand',sans-serif; font-size: 4.25vmin;">Email : {{UserData['Email']}}</div>
+            
+            <div style="font-family: 'Quicksand',sans-serif; font-size: 4.25vmin;">Birth Date : {{UserData['Age']}}</div>
+
+            <div class="separator">Activies</div>
+
+            <div class="row">
+                    <div class="col-md-6" style="font-family: 'Quicksand',sans-serif; font-size: 4.25vmin;">No. of Question Asked : {{Question_data|length}}</div>
+                
+                    <div class="col-md-6" style="font-family: 'Quicksand',sans-serif; font-size: 4.25vmin;">No. of Question Answered : {{Answer_data|length}}</div>
+            </div>
+            
+            <div class="row" >
+                
+            
+                <div class="col-md-6" style="margin-top: 2vmax; "><a class="btn btn-danger pills" href="/logout">Logout</a></div>
+            </div>
+
     </div>
-            <div Id = "Question">
+        <br>
+        <br>
+        <br>
+
+        <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+            <li class="nav-item" >
+              <a class="nav-link active pills" style="color: #e1e1e1; " id="pills-Questions-tab" data-toggle="pill" href="#pills-Questions" role="tab" aria-controls="pills-Questions" aria-selected="true">Questions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pills" style="color: #e1e1e1; " id="pills-Answers-tab " data-toggle="pill" href="#pills-Answers" role="tab" aria-controls="pills-Answers" aria-selected="false">Answers</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active anim" id="pills-Questions" role="tabpanel" aria-labelledby="pills-Questions-tab">
                 {% if Question_data %}
-                <p class='title-follow' style = "padding-top: 10vmin">You have asked following questions</p>
+                <div class="separator" style="color: #e1e1e1; font-size: 2vmax;margin: 2vmax; margin-bottom: 3vmax; ">Your Questions</div>
                 {% else %}
-                <p class='title-follow' style = "padding-top: 10vmin">You have asked no questions yet.</p>
+                <p class='title-follow'style="font-family: 'Quicksand',sans-serif;margin: 2vmax; margin-bottom: 3vmax; " >You have asked no questions yet.</p>
                 {% endif %}
 
                 {% for data in Question_data %}
@@ -25,19 +57,53 @@
                     <div class="card-body">
                         <a class="stretched-link " href={{url_for('question', Qid = data['Qid'])}}></a>
                         <div class="row">
-                        <div class="card-title col-md-10 fstyleNormal">{{data['Question']}} </div>
+                        <div class="card-title col-md-10">{{data['Question']}} </div>
                         <div class ="col-md-2 ml-auto">
-                            <p style = "font-size: 3.5vmin; padding: 1vmin; font-family: 'Patrick Hand';" >Answers - {{data['AnsCount']}}</p>
+                            <p style = "font-size: 2.75vmin; padding: .5vmin; font-family:'Quicksand', sans-serif;" >Answers - {{data['AnsCount']}}</p>
                         </div>
                         </div>
                         <div class="row">
-                            <div class ="col-md-2">
+                            <div class ="col-md-4">
                                 <p class="User-date">On: {{data['PostDate']}}</p>
                             </div>
-                            <div class ="col-md-3">
+                            <div class ="col-md-4">
                                 <p class="User-date">Subject: {{data['SubName']}}</p>
                             </div>
-                            <div class ="col-md-2">
+                            <div class ="col-md-4">
+                                <p class="User-date">Standard: {{data['StdName']}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+        
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade anim" id="pills-Answers" role="tabpanel" aria-labelledby="pills-Answers-tab">
+                {% if Answer_data %}
+                <div class="separator" style="color: #e1e1e1; font-size: 2vmax; margin: 2vmax; margin-bottom: 3vmax;">Your Answers</div>
+                {% else %}
+                <p style="font-family: 'Quicksand',sans-serif; margin: 2vmax; margin-bottom: 3vmax;" class="title-follow " >You have asked no questions yet.</p>
+                {% endif %}
+
+                {% for data in AnAnswerswer_data %}
+                <div class="card">
+                    <div class="card-body">
+                        <a class="stretched-link " href={{url_for('question', Qid = data['Qid'] )}}></a>
+                        <div class="row">
+                            <div class="card-title col-md-10">{{data['Question']}} </div>
+                            <div class ="col-md-2 ml-auto">
+                                <p style = "font-size: 2.75vmin; padding: .5vmin; font-family:'Quicksand', sans-serif;" >Answers - {{data['AnsCount']}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class ="col-md-4">
+                                <p class="User-date">On: {{data['PostDate']}}</p>
+                            </div>
+                            <div class ="col-md-4">
+                                <p class="User-date">Subject: {{data['SubName']}}</p>
+                            </div>
+                            <div class ="col-md-4">
                                 <p class="User-date">Standard: {{data['StdName']}}</p>
                             </div>
                         </div>
@@ -48,34 +114,68 @@
                 {% endfor %}
             </div>
 
-        {% else %}
-            <h1 class="fstyleNormal">Not yet logged in</h1>
-            <a class="btn btn-primary" href = "/login">Login</a>
-            <a class="btn btn-success" href = "/register">Register</a>
+        </div>
+
         {% endif%}
     </div>
 
-
 </div>
 <style>
-    .fstyleNormal{
-        font-family: "Patrick Hand";
-    }
-    
+
     .card-title{
         font-size: 5.5vmin;
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 500;
     }
     .User-date{
-        font-size: 2.5vmin;
-        font-family: "Patrick Hand";
+        font-size: 2vmin;
+        font-family: 'Quicksand', sans-serif;
     }
-    
     .card{
         background-color: #111111;
         color: #e1e1e1;
         padding: 2vh;
+        
+    }
+    .jumbotron{
+        background-color: #111111;
+        color: #e1e1e1;
+        margin-top: 4vmax;
+    }
+    .username{
+        font-family: 'Anton',sans-serif;
+        font-size: 3.8vmax;
+    }
+    .title-follow{
+        margin-top: 10vmin;
+        color:#e1e1e1;
+        font-family: 'Quciksand',sans-serif;
+        font-size: 2vmax;
     }
 
-
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
+    }
+    .pills{
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 600;
+    }
+    
 </style>
+{% include 'includes/footer.html' %}
 {% endblock %}

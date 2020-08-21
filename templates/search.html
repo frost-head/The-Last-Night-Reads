@@ -1,0 +1,154 @@
+{% extends 'Base.html' %}
+
+{% block head %}
+<title>Search</title> 
+{% endblock %}
+
+{% block body %}
+<div id = "Question">
+    <div class="container anim" >
+        <div >
+            <div class="separator" style="color: #e1e1e1; font-size: 2.5vmax; ">Search</div>
+                
+        </div>
+        <form method="POST" action="" class="padall anim">
+            {% for element in form%}
+                <div class="form-group row">
+    
+                    <div class="col-sm-4">
+                        {{ element.label(class="Flabel col-form-label") }}   
+                        <br>
+                        {% if element.errors %}
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            <ul class="err HelpBolck">{% for error in element.errors %}<li >{{ error }}</li>{% endfor %}</ul>
+                        </small>
+                            
+                        {% else %}
+                        <small id="passwordHelpBlock" class="form-text text-muted HelpBolck">
+                            {{element.description}}
+                        </small>
+                        {% endif %}           
+                    </div>
+                    {{ element(class="form-control form-control col-sm-6") }}
+                
+                </div>
+            {%endfor%}
+            <br>
+            <input class="btn btn-primary HelpBolck" type="submit" value="Search">
+        </form>
+
+        {% if Question_data == None%}
+            <p class='card-title ' style = "padding-top: 10vmin">No questions found </p>
+        {% endif %}
+        <br>
+        <p class="Flabel">{{Question_data|length}} Questions found</p>
+        {% for data in Question_data %}
+            
+            <div class="card ">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="card-title col-md-10">{{data['Question']}} </div>
+                        <div class ="col-md-2 ml-auto">
+                            <p style = "font-size: 2.75vmin; padding: .5vmin; font-family:'Quicksand', sans-serif;" >Answers - {{data['AnsCount']}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class ="col-md-3">
+                            <p class="User-date">By: {{data['Username']}}</p>
+                        </div>
+                        <div class ="col-md-3">
+                            <p class="User-date">On: {{data['PostDate']}}</p>
+                        </div>
+                        <div class ="col-md-3">
+                            <p class="User-date">Subject: {{data['SubName']}}</p>
+                        </div>
+                        <div class ="col-md-3">
+                            <p class="User-date">Standard: {{data['StdName']}}</p>
+                        </div>
+                    </div>
+                    <div class="row" style = "padding-top: 1.5vmin">
+                        <a class="btn btn-primary User-date col-md-5 HelpBolck" style="width: 99%; padding: 0.5vmax;" href={{url_for('answer', Qid = data['Qid'])}}>Answer</a>
+                       
+                        <div class="col-md-2">
+                            <br>
+                        </div>
+                        
+                        <a class="btn btn-primary User-date col-md-5 HelpBolck" style="width: 99%; padding: 0.5vmax;" href={{url_for('question', Qid = data['Qid'])}}>Show Question</a>
+
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </a>
+        <br>
+
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .Flabel{
+        font-size: 2vmax;
+        color: #e1e1e1;
+        font-family: "Quicksand",sans-serif;
+        font-weight:550;
+    }
+    .err{
+        color: #ff5050;
+        font-family: "Quicksand",sans-serif;
+    }
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
+    }
+    .padall{
+        padding: 2vmax;
+    }
+
+    .card-title{
+        font-size: 5.5vmin;
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 500;
+    }
+    .User-date{
+        font-size: 2vmin;
+        font-family: 'Quicksand', sans-serif;
+    }
+    .card{
+        background-color: #111111;
+        color: #e1e1e1;
+        padding: 2vh;
+    }
+    .HelpBolck{
+        font-family: 'Quicksand',sans-serif;
+        font-weight: 600;
+    }
+
+    .title-follow{
+        margin-top: 10vmin;
+        color:#e1e1e1;
+        font-family: 'Quciksand',sans-serif;
+        font-size: 2vmax;
+    }
+
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 2vmax;
+        font-family: 'Anton',sans-serif;
+    }
+    .separator::before, .separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e1e1e1;
+    }
+    .separator::before {
+        margin-right: .25em;
+    }
+    .separator::after {
+        margin-left: .25em;
+    }
+
+</style>
+{% include 'includes/footer.html' %}
+{% endblock %}
