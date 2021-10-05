@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'TonyStark@439751'
+app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'LNR'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = os.urandom(24)
